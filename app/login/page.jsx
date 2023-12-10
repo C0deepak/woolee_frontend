@@ -1,10 +1,15 @@
 import React from 'react'
+import Image from 'next/image'
+import logo from '../images/sheep.jpeg'
 const page = () => {
   return (
     <div>
-    <div className='flex justify-center h-screen items-center flex-col'>
-      <div className='shadow-xl px-5 py-10'>
-        <div className='mb-6'>
+      <div className='flex justify-center'>
+        <Image src={logo}  alt="....."width={90} height={90} className='mt-4'/>
+      </div>
+    <div className='flex h-screen items-center flex-col'>
+      <div className='shadow-xl px-5 py-5'>
+        <div className='mb-2'>
         <h1 className='font-bold text-2xl font-poppins'>Login</h1>
         <h3 className='text-gray-600 text-sm'>Login to your account</h3>
         </div>
