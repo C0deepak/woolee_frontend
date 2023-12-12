@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const page = () => {
@@ -13,11 +14,15 @@ const page = () => {
         </div>
         <div className='w-[70%] flex flex-col gap-8 p-8'>
           <div className='w-full flex flex-col'>
-            <div className='font-semibold text-2xl'>Login</div>
-            <div className='font-medium text-zinc-400'>Login to your account</div>
+            <div className='font-semibold text-2xl'>Register</div>
+            <div className='font-medium text-zinc-400'>Create a new account</div>
           </div>
 
           <div className='w-full flex flex-col gap-6'>
+            <div className='flex flex-col gap-1 text-sm'>
+              <label className='font-medium'>Name</label>
+              <input type='text' placeholder='Alexa' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+            </div>
             <div className='flex flex-col gap-1 text-sm'>
               <label className='font-medium'>Email Id</label>
               <input type='email' placeholder='alexa@gmail.com' className='outline-none border-b-[1px] border-zinc-400 p-1' />
@@ -29,8 +34,8 @@ const page = () => {
           </div>
 
           <div className='w-full flex flex-col gap-2'>
-            <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit'>Login</button>
-            <div className='text-xs'>New user ? <Link href='/register' className='font-bold'>Register</Link></div>
+            <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit'>Create Account</button>
+            <div className='text-xs'>Already a user ? <Link href='/login' className='font-bold'>Login</Link></div>
           </div>
         </div>
       </div>
