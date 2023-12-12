@@ -1,8 +1,30 @@
-import React from 'react'
-import Image from 'next/image'
+'use client'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import axios from 'axios';
 
 const page = () => {
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+
+    try {
+      const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/register', formData);
+      console.log('Registration successful', response.data.message);
+    } catch (error) {
+      console.error('Registration failed', error);
+    }
+  };
+
   return (
     <div className='flex w-full relative font-poppins'>
       <div className='w-1/3 min-h-screen bg-zinc-900'></div>
@@ -21,20 +43,20 @@ const page = () => {
           <div className='w-full flex flex-col gap-6'>
             <div className='flex flex-col gap-1 text-sm'>
               <label className='font-medium'>Name</label>
-              <input type='text' placeholder='Alexa' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <input type='text' name="username" value={formData.username} onChange={handleChange} placeholder='Alexa' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
             <div className='flex flex-col gap-1 text-sm'>
               <label className='font-medium'>Email Id</label>
-              <input type='email' placeholder='alexa@gmail.com' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <input type='email' name="email" value={formData.email} onChange={handleChange} placeholder='alexa@gmail.com' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
             <div className='flex flex-col gap-1 text-sm'>
               <label className='font-medium'>Password</label>
-              <input type='password' placeholder='*********' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <input type='password' name="password" value={formData.password} onChange={handleChange} placeholder='*********' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
           </div>
 
           <div className='w-full flex flex-col gap-2'>
-            <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit'>Create Account</button>
+            <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit' onClick={handleSubmit}>Create Account</button>
             <div className='text-xs'>Already a user ? <Link href='/login' className='font-bold'>Login</Link></div>
           </div>
         </div>
