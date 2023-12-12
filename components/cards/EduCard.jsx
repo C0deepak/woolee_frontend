@@ -1,11 +1,10 @@
 import React from 'react'
-import Image from 'next/image'
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FaRegBookmark } from "react-icons/fa6";
 
-const page = () => {
+const EduCard = () => {
     return (
-        <div className='flex flex-col shadow-lg gap-2 p-4 w-[420px] font-poppins text-sm'>
+        <div className='flex flex-col shadow-lg gap-2 p-4 min-w-[420px] font-poppins text-sm'>
 
             <div className='flex justify-between items-center'>
                 <div className='flex items-center gap-2'>
@@ -32,4 +31,4 @@ const page = () => {
     )
 }
 
-export default page
+export default EduCard
