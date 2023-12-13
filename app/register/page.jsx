@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 
-const page = () => {
+const Register = () => {
 
   const [formData, setFormData] = useState({
     username: '',
@@ -65,4 +65,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Register
