@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProductCard = () => {
     return (
-        <div className='flex flex-col shadow-lg min-w-[380px] gap-3 p-4 font-poppins text-sm'>
+        <div className='flex flex-col shadow-lg min-w-[380px] gap-3 p-4 font-poppins text-sm bg-white'>
             <div className='text-zinc-950 font-semibold'>Pashmina Wool (Cashmere)</div>
 
             <div className='flex  gap-[0.8rem] text-zinc-400 text-xs'>
