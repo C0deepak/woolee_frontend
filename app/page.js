@@ -25,15 +25,15 @@ export default function Home() {
 
             <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
-              <div className='text-zinc-900 leading-3 pl-14'>producers are the farmers who produces wools...</div>
+              <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
             </div>
             <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
-              <div className='text-zinc-900 leading-3 pl-14'>producers are the farmers who produces wools...</div>
+              <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
             </div>
             <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
-              <div className='text-zinc-900 leading-3 pl-14'>producers are the farmers who produces wools...</div>
+              <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
             </div>
           </div>
         </div>
