@@ -40,7 +40,7 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
-                <Link href='/' className='text-zinc-400 hover:text-zinc-200'>Marketplace</Link>
+                <Link href='/marketplace' className='text-zinc-400 hover:text-zinc-200'>Marketplace</Link>
                 <Link href='/' className='text-zinc-400 hover:text-zinc-200'>Resources</Link>
             </div>
             {/* <div className='relative'>

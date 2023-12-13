@@ -23,5 +23,3 @@ const page = () => {
 }
 
 export default page
-
-{/* <img src='/img/wool.jpg' alt="....." className='rounded-lg w-[140px]' /> */}
