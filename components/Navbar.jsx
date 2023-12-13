@@ -1,22 +1,40 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoDotFill } from 'react-icons/go'
 import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn } from 'react-icons/fi'
 
 const Navbar = () => {
     const [openPages, setOpenPages] = useState(false)
     const [openProfile, setOpenProfile] = useState(false)
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 40) {
+                setScrolling(true);
+            } else {
+                setScrolling(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <nav className='flex items-center justify-between font-poppins py-3 px-4 fixed top-0 left-0 w-full z-10'>
+        <nav className={`flex items-center justify-between font-poppins py-3 px-4 fixed top-0 left-0 w-full z-10 ${scrolling && 'bg-zinc-900/[.7] shadow-lg backdrop-blur'}`}>
             <div>
                 <img src="/img/logow.png" alt="" className='w-10 h-10' />
             </div>
             <div className='flex items-center gap-6 font-medium text-sm'>
                 <Link href='/' className='text-zinc-400 hover:text-zinc-200'>Home</Link>
                 <div className='relative'>
-                    <Link href='/' className='text-zinc-400 hover:text-zinc-200 flex items-center gap-1' onClick={() => setOpenPages(!openPages)}>Pages {openPages ? <FiChevronUp /> : <FiChevronDown />}</Link>
+                    <div className='cursor-pointer text-zinc-400 hover:text-zinc-200 flex items-center gap-1' onClick={() => setOpenPages(!openPages)}>Pages {openPages ? <FiChevronUp /> : <FiChevronDown />}</div>
 
                     {openPages && (
                         <div className='absolute shadow w-[380px] top-8 right-0 flex gap-1 z-20 bg-white p-1'>
@@ -43,7 +61,7 @@ const Navbar = () => {
                 <Link href='/marketplace' className='text-zinc-400 hover:text-zinc-200'>Marketplace</Link>
                 <Link href='/' className='text-zinc-400 hover:text-zinc-200'>Resources</Link>
             </div>
-            {/* <div className='relative'>
+            <div className='relative'>
                 <img src="/img/avatar.png" alt="" className='w-10 h-10 rounded-full cursor-pointer' onClick={() => setOpenProfile(!openProfile)}/>
 
                 {openProfile && (
@@ -57,8 +75,8 @@ const Navbar = () => {
                         <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiLogOut />Logout</div>
                     </div>
                 )}
-            </div> */}
-            <Link href='/login' className='cursor-pointer rounded-full w-8 h-8 flex items-center justify-center text-zinc-900 bg-zinc-200'><FiLogIn /></Link>
+            </div>
+            {/* <Link href='/login' className='cursor-pointer rounded-full w-8 h-8 flex items-center justify-center text-zinc-900 bg-zinc-200'><FiLogIn /></Link> */}
         </nav>
     )
 }
