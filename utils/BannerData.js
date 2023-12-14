@@ -1,31 +1,31 @@
 const BannerData = [
     {
         id: 1,
-        img: '1.png'
+        img: '/banner/1.png'
     },
     {
         id: 2,
-        img: '2.png'
+        img: '/banner/2.png'
     },
     {
         id: 3,
-        img: '3.png'
+        img: '/banner/3.png'
     },
     {
         id: 4,
-        img: '4.png'
+        img: '/banner/4.png'
     },
     {
         id: 5,
-        img: '5.png'
+        img: '/banner/5.png'
     },
     {
         id: 6,
-        img: '6.png'
+        img: '/banner/6.png'
     },
     {
         id: 7,
-        img: '7.png'
+        img: '/banner/7.png'
     },
 ]
 

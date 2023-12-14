@@ -1,6 +1,7 @@
 import BannerSlider from '@/components/Slider/BannerSlider'
 import EduCard from '@/components/cards/EduCard'
 import ProductCard from '@/components/cards/ProductCard'
+import BannerData from '@/utils/BannerData'
 import { BsJournalBookmark, BsShop } from 'react-icons/bs'
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
 
       <div className='pt-24 relative flex flex-col gap-4'>
         <div className='font-extrabold text-6xl p-4 uppercase text-zinc-600 w-[600px] leading-tight'>let's make <span className='text-white'>wool</span> the trend</div>
-        <div><BannerSlider /></div>
+        <div><BannerSlider data={BannerData}/></div>
       </div>
 
       <div className='pb-0 p-10 relative'>

@@ -4,9 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { Autoplay, Pagination } from 'swiper/modules';
-import BannerData from '@/utils/BannerData';
 
-const BannerSlider = () => {
+const BannerSlider = ({ data }) => {
   return (
     <>
       <Swiper
@@ -43,9 +42,9 @@ const BannerSlider = () => {
           "--swiper-pagination-bullet-horizontal-gap": "4px"
         }}
       >
-        {BannerData.map((banner) => (
+        {data.map((banner) => (
           <SwiperSlide key={banner.id} className='pb-12'>
-            <img src={`/img/banner/${banner.img}`} alt=""/>
+            <img src={`/img${banner.img}`} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>
