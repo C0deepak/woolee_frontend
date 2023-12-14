@@ -7,7 +7,7 @@ const ProductCard = () => {
 
             <div className='flex  gap-[0.8rem] text-zinc-400 text-xs'>
                 <div className='flex gap-[0.2rem]'>
-                    <div> <img src="/img/certified.jpeg" alt="" className='w-4 h-4 rounded-full' /></div>
+                    <div> <img src="/img/c2.jpeg" alt="" className='w-4 h-4 rounded-full' /></div>
                     <div>A+ Certified</div>
                 </div>
                 <div>Posted - 12hrs ago</div>

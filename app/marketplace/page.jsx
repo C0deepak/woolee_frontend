@@ -2,6 +2,7 @@ import React from 'react'
 import { IoMdSearch } from "react-icons/io"
 import { GiWool } from "react-icons/gi";
 import ProductCard from '@/components/cards/ProductCard';
+import ProductCard2 from '@/components/cards/ProductCard2';
 const page = () => {
   return (
     <div className='flex flex-col gap-10'>
@@ -110,7 +111,42 @@ const page = () => {
         </div>
         
         </div>
+        {/* based on processing */}
+        <div className='text-zinc-300 bg-zinc-800 w-44 rounded-2xl h-8  flex  items-center justify-center'>Based On Processing</div>
+        <div className='flex gap-10'>
+
+        <div className='flex flex-col items-center gap-1'>
+            <div className=' bg-zinc-100 w-16 h-16 rounded-full flex  justify-center items-center hover:bg-zinc-300'>
+            <GiWool size={50}/>
+            </div>
+            <div className='text-sm text-zinc-700 font-normal'>Cleaned Wool</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+            <div className=' bg-zinc-100 w-16 h-16 rounded-full flex  justify-center items-center hover:bg-zinc-300'>
+            <GiWool size={50}/>
+            </div>
+            <div className='text-sm text-zinc-700 font-normal'>Carded Wool</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+            <div className=' bg-zinc-100 w-16 h-16 rounded-full flex  justify-center items-center hover:bg-zinc-300'>
+            <GiWool size={50}/>
+            </div>
+            <div className='text-sm text-zinc-700 font-normal'>Dyed Wool</div>
+        </div>
+        <div className='flex flex-col items-center gap-1'>
+            <div className=' bg-zinc-100 w-16 h-16 rounded-full flex  justify-center items-center  hover:bg-zinc-300 '>
+            <GiWool size={50}/>
+            </div>
+            <div className='text-sm text-zinc-700 font-normal'>Polished Wool</div>
+        </div>
+        
+        </div>
       </div>
+             
+
+        
+
+
 
       {/* Exclusive offers section */}
       <div className='flex flex-col gap-10 px-8'>
@@ -136,7 +172,14 @@ const page = () => {
 
         <div className='flex flex-col gap-10 px-8'>
             <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'>Just for You</div>
-            <div></div>
+               <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
+        {Array(6)
+        .fill(true)
+        .map((item, index) => (
+          <ProductCard2 key={index}/>
+          ))}
+        
+        </div>
         </div>
 
 
