@@ -7,7 +7,7 @@ const Profile = () => {
   return (
     <div>
       <div>Profile</div>
-      <div>{isLoadingIn && user.name}</div>
+      <div>{isLoggedIn && user.name}</div>
     </div>
   )
 }
