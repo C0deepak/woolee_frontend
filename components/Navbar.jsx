@@ -89,10 +89,9 @@ const Navbar = () => {
                             </div>
                             <Link href='/profile' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</Link>
                             <Link href='/shop' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><BsShop /> Shop</Link>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdOutlineDesignServices />Request Services</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdShoppingCartCheckout />Cart</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookmark />Bookmarks</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <Link href='/services' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdOutlineDesignServices />Request Services</Link>
+                            <Link href='/cart' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdShoppingCartCheckout />Cart</Link>
+                            <Link href='/privacy' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</Link>
                             <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
                         </div>
                     )}

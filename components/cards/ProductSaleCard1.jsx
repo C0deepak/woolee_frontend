@@ -1,11 +1,10 @@
 import React from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 
-const InventoryCard = () => {
+const ProductSaleCard1 = () => {
     return (
         <div className='flex flex-col shadow-lg w-[380px] gap-3 p-4 font-poppins text-sm bg-white'>
             <div className='text-zinc-950 font-semibold'>Pashmina Wool (Cashmere)</div>
-            <div className='text-zinc-500 font-medium text-xs'>P#BA56244</div>
 
             <div className='flex  gap-[0.8rem] text-zinc-400 text-xs'>
                 <div className='flex gap-[0.2rem]'>
@@ -39,15 +38,8 @@ const InventoryCard = () => {
                     <div className='text-zinc-950 font-semibold text-xs'>#124532</div>
                     <div className=' text-zinc-400 text-xs'>P_Id</div>
                 </div>
-                <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>In Farm</div>
-                    <div className=' text-zinc-400 text-xs'>Location</div>
-                </div>
-                <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>Dying</div>
-                    <div className=' text-zinc-400 text-xs'>Under Process</div>
-                </div>
             </div>
+            <div className='text-zinc-950 text-xs font-medium'>Lorem ipsum, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, dolorum. dolor sit amet consectetur adipisicing elit. Molestias, nisi!</div>
             <div className='flex justify-between'>
                 <div className='flex justify-around gap-1 items-center py-1 px-6 h-8 rounded-3xl border-2 border-zinc-950' >
                     <button className='w-fit text-zinc-950 '>Edit</button>
@@ -61,4 +53,4 @@ const InventoryCard = () => {
     )
 }
 
-export default InventoryCard
+export default ProductSaleCard1

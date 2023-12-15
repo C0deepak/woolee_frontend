@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCard = () => {
+const ProductCard1 = () => {
     return (
         <div className='flex flex-col shadow-lg min-w-[380px] gap-3 p-4 font-poppins text-sm bg-white'>
             <div className='text-zinc-950 font-semibold'>Pashmina Wool (Cashmere)</div>
@@ -41,4 +41,4 @@ const ProductCard = () => {
     )
 }
 
-export default ProductCard
+export default ProductCard1

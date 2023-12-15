@@ -1,11 +1,11 @@
 'use client'
 import BannerSlider from '@/components/Slider/BannerSlider'
 import EduCard from '@/components/cards/EduCard'
-import ProductCard from '@/components/cards/ProductCard'
 import { useAuth } from '../context/authContext'
 import BannerData from '@/utils/BannerData'
 import Link from 'next/link'
 import { BsJournalBookmark, BsShop } from 'react-icons/bs'
+import ProductCard1 from '@/components/cards/ProductCard1'
 
 export default function Home() {
   const { isLoggedIn, user } = useAuth()
@@ -14,7 +14,7 @@ export default function Home() {
       <div className='absolute top-0 left-0 min-h-[70vh] w-full bg-zinc-800 z-0'></div>
 
       <div className='pt-24 relative flex flex-col'>
-        {isLoggedIn && (<div className='font-extrabold text-2xl px-4 uppercase text-zinc-600 leading-tight'>Welcome Back! &#128075; <span className='text-white'>{user.name.split(' ')[0]}</span></div>)}
+        {isLoggedIn && (<div className='font-extrabold text-2xl px-4 uppercase text-zinc-600 leading-tight'>Welcome Back! <span className='text-white'>{user?.name.split(' ')[0]}</span></div>)}
         <div className='flex flex-col gap-4'>
           <div className='font-extrabold text-6xl p-4 uppercase text-zinc-600 w-[600px] leading-tight'>let's make <span className='text-white'>wool</span> the trend</div>
           <div><BannerSlider data={BannerData} /></div>
@@ -98,11 +98,11 @@ export default function Home() {
       <div className='p-10'>
         <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><BsShop /> Explore the marketplace</div>
         <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          <ProductCard1 />
+          <ProductCard1 />
+          <ProductCard1 />
+          <ProductCard1 />
+          <ProductCard1 />
         </div>
       </div>
 

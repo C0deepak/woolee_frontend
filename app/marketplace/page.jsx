@@ -1,7 +1,7 @@
 import React from 'react'
 import { IoMdSearch } from "react-icons/io"
 import { GiWool } from "react-icons/gi";
-import ProductCard from '@/components/cards/ProductCard';
+import ProductCard1 from '@/components/cards/ProductCard1';
 import ProductCard2 from '@/components/cards/ProductCard2';
 import OfferData from '@/utils/OfferData';
 import BannerSlider from '@/components/Slider/BannerSlider';
@@ -14,7 +14,7 @@ const Marketplace = () => {
 
             <div className='bg-zinc-800 pb-8'>
                 <div className='mt-20 flex justify-center'>
-                    <div className='flex gap-2 w-96 text-zinc-100 text-sm rounded-3xl px-4 py-1.5 border-2 border-zinc-400'>
+                    <div className='flex items-center gap-2 w-96 text-zinc-100 text-sm rounded-3xl px-4 py-1.5 border-2 border-zinc-400'>
                         <IoMdSearch className='' size={25} color='zinc' />
                         <input type="search" placeholder="Search" className='block w-full focus:outline-none placeholder:text-zinc-400 text-zinc-100 bg-zinc-800' />
                     </div>
@@ -158,7 +158,7 @@ const Marketplace = () => {
                     {Array(6)
                         .fill(true)
                         .map((item, index) => (
-                            <ProductCard key={index} />
+                            <ProductCard1 key={index} />
                         ))}
 
                 </div>
