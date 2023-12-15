@@ -7,7 +7,7 @@ const Profile = () => {
   return (
     <div>
       <div>Profile</div>
-      <div>{user.name}</div>
+      <div>{isLoadingIn && user.name}</div>
     </div>
   )
 }
