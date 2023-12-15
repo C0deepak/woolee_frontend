@@ -2,9 +2,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
+import { useAuth } from '@/context/authContext';
 
 const Login = () => {
-
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,6 +20,13 @@ const Login = () => {
     try {
       const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/login', formData);
       console.log('Login successful', response.data.message);
+      const userData = {
+        token: response.data.token,
+        role: response.data.role,
+        name: 'Tyler',
+        email: 'tyler@gmail.com'
+      };
+      login(userData);
     } catch (error) {
       console.error('Login failed', error);
     }

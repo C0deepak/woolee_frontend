@@ -2,9 +2,13 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { GoDotFill } from 'react-icons/go'
-import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn } from 'react-icons/fi'
+import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn, FiBookmark } from 'react-icons/fi'
+import { MdOutlineDesignServices, MdShoppingCartCheckout } from 'react-icons/md'
+import { BsShop } from 'react-icons/bs'
+import { useAuth } from '@/context/authContext'
 
 const Navbar = () => {
+    const { isLoggedIn, logout, user } = useAuth()
     const [openPages, setOpenPages] = useState(false)
     const [openProfile, setOpenProfile] = useState(false)
     const [scrolling, setScrolling] = useState(false);
@@ -61,22 +65,53 @@ const Navbar = () => {
                 <Link href='/marketplace' className='text-zinc-400 hover:text-zinc-200'>Marketplace</Link>
                 <Link href='/' className='text-zinc-400 hover:text-zinc-200'>Resources</Link>
             </div>
-            <div className='relative'>
-                <img src="/img/avatar.png" alt="" className='w-10 h-10 rounded-full cursor-pointer' onClick={() => setOpenProfile(!openProfile)}/>
+            {isLoggedIn && (
+                <div className='relative'>
+                    <img src="/img/avatar.png" alt="" className='w-10 h-10 rounded-full cursor-pointer' onClick={() => setOpenProfile(!openProfile)} />
 
-                {openProfile && (
-                    <div className='absolute shadow w-[200px] top-full right-2 flex flex-col z-20 bg-white divide-y divide-zinc-200 text-sm'>
-                        <div className='px-2 py-1.5'>
-                            <div className='font-medium'>Alexa Amazon</div>
-                            <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />Member since 2003</div>
+                    {openProfile && user.role === 'user' && (
+                        <div className='absolute shadow w-[200px] top-full right-2 flex flex-col z-20 bg-white divide-y divide-zinc-200 text-sm'>
+                            <div className='px-2 py-1.5'>
+                                <div className='font-medium'>{user.name}</div>
+                                <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
+                            </div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
                         </div>
-                        <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
-                        <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
-                        <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiLogOut />Logout</div>
-                    </div>
-                )}
-            </div>
-            {/* <Link href='/login' className='cursor-pointer rounded-full w-8 h-8 flex items-center justify-center text-zinc-900 bg-zinc-200'><FiLogIn /></Link> */}
+                    )}
+
+                    {openProfile && user.role === 'producer' && (
+                        <div className='absolute shadow w-[200px] top-full right-2 flex flex-col z-20 bg-white divide-y divide-zinc-200 text-sm'>
+                            <div className='px-2 py-1.5'>
+                                <div className='font-medium'>{user.name}</div>
+                                <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
+                            </div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><BsShop /> Shop</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdOutlineDesignServices />Request Services</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdShoppingCartCheckout />Cart</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookmark />Bookmarks</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
+                        </div>
+                    )}
+
+                    {openProfile && user.role === 'processor' && (
+                        <div className='absolute shadow w-[200px] top-full right-2 flex flex-col z-20 bg-white divide-y divide-zinc-200 text-sm'>
+                            <div className='px-2 py-1.5'>
+                                <div className='font-medium'>{user.name}</div>
+                                <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
+                            </div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Shop(Add item, inventory)</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
+                        </div>
+                    )}
+                </div>
+            )}
+            {!isLoggedIn && (<Link href='/login' className='cursor-pointer rounded-full w-8 h-8 flex items-center justify-center text-zinc-900 bg-zinc-200'><FiLogIn /></Link>)}
         </nav>
     )
 }

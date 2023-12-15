@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
+import { useAuth } from '@/context/authContext';
 
 const ProducerRegister = () => {
+    const { isLoggedIn, user } = useAuth();
     const [formData, setFormData] = useState({
         farm_name: '',
         phone: '',
@@ -18,8 +20,22 @@ const ProducerRegister = () => {
     };
 
     const handleSubmit = async () => {
+        if (!isLoggedIn) {
+            console.log('Login to access the feature!')
+            return;
+        }
+        console.log(token)
+        console.log(isLoggedIn)
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${user.token}`,
+            },
+        };
+
         try {
-            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/producers', formData, { withCredentials: true });
+            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/producers', formData, config);
             console.log('Registration successful', response.data.message);
         } catch (error) {
             console.error('Registration failed', error);

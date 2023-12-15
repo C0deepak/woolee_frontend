@@ -1,44 +1,52 @@
+'use client'
 import BannerSlider from '@/components/Slider/BannerSlider'
 import EduCard from '@/components/cards/EduCard'
 import ProductCard from '@/components/cards/ProductCard'
+import { useAuth } from '../context/authContext'
 import BannerData from '@/utils/BannerData'
 import Link from 'next/link'
 import { BsJournalBookmark, BsShop } from 'react-icons/bs'
 
 export default function Home() {
+  const { isLoggedIn, user } = useAuth()
   return (
     <div className='font-poppins'>
       <div className='absolute top-0 left-0 min-h-[70vh] w-full bg-zinc-800 z-0'></div>
 
-      <div className='pt-24 relative flex flex-col gap-4'>
-        <div className='font-extrabold text-6xl p-4 uppercase text-zinc-600 w-[600px] leading-tight'>let's make <span className='text-white'>wool</span> the trend</div>
-        <div><BannerSlider data={BannerData}/></div>
+      <div className='pt-24 relative flex flex-col'>
+        <div className='font-extrabold text-2xl px-4 uppercase text-zinc-600 leading-tight'>Welcome Back! &#128075; <span className='text-white'>Tylor</span></div>
+        <div className='flex flex-col gap-4'>
+          <div className='font-extrabold text-6xl p-4 uppercase text-zinc-600 w-[600px] leading-tight'>let's make <span className='text-white'>wool</span> the trend</div>
+          <div><BannerSlider data={BannerData} /></div>
+        </div>
       </div>
 
       <div className='pb-0 p-10 relative'>
         <img src="/img/bg1.png" alt="" className='absolute top-0 left-0 w-60 z-0' />
         <img src="/img/bg1.png" alt="" className='absolute bottom-0 right-0 w-60 z-0' />
-        <div className='relative flex gap-10 p-10'>
-          <div className='w-[30%]'>
-            <img src="/img/bg.webp" alt="" className='w-full' />
-          </div>
-          <div className='flex justify-center flex-col w-[70%]'>
-            <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
+        {isLoggedIn && user.role === 'user' || !isLoggedIn && (
+          <div className='relative flex gap-10 p-10'>
+            <div className='w-[30%]'>
+              <img src="/img/bg.webp" alt="" className='w-full' />
+            </div>
+            <div className='flex justify-center flex-col w-[70%]'>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
 
-            <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-              <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
-              <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
-            </Link>
-            <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-              <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
-              <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
-            </Link>
-            <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-              <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
-              <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
-            </Link>
+              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
+                <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
+              </Link>
+              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
+                <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
+              </Link>
+              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
+                <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className='p-10'>
