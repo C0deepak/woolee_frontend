@@ -52,7 +52,7 @@ const Login = () => {
 
           <div className='w-full flex flex-col gap-2'>
             <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit' onClick={handleSubmit}>Login</button>
-            <div className='text-xs'>New user ? <Link href='/register' className='font-bold'>Register</Link></div>
+            <div className='text-xs'>New user ? <Link href='/producer-register' className='font-bold'>Register</Link></div>
           </div>
         </div>
       </div>

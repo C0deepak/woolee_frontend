@@ -8,7 +8,7 @@ import BannerSlider from '@/components/Slider/BannerSlider';
 import { FiGift } from 'react-icons/fi';
 import { LuFlame } from 'react-icons/lu';
 import { TbMoodHeart } from 'react-icons/tb';
-const page = () => {
+const Marketplace = () => {
     return (
         <div className='flex flex-col gap-10 font-poppins'>
 
@@ -182,4 +182,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Marketplace

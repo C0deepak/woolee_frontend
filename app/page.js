@@ -2,6 +2,7 @@ import BannerSlider from '@/components/Slider/BannerSlider'
 import EduCard from '@/components/cards/EduCard'
 import ProductCard from '@/components/cards/ProductCard'
 import BannerData from '@/utils/BannerData'
+import Link from 'next/link'
 import { BsJournalBookmark, BsShop } from 'react-icons/bs'
 
 export default function Home() {
@@ -24,18 +25,18 @@ export default function Home() {
           <div className='flex justify-center flex-col w-[70%]'>
             <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
 
-            <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+            <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
               <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
-            </div>
-            <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+            </Link>
+            <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
               <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
-            </div>
-            <div className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+            </Link>
+            <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
               <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
               <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
