@@ -6,8 +6,10 @@ import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn, FiBo
 import { MdOutlineDesignServices, MdShoppingCartCheckout } from 'react-icons/md'
 import { BsShop } from 'react-icons/bs'
 import { useAuth } from '@/context/authContext'
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+    const path = usePathname();
     const { isLoggedIn, logout, user } = useAuth()
     const [openPages, setOpenPages] = useState(false)
     const [openProfile, setOpenProfile] = useState(false)
@@ -29,6 +31,11 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    useEffect(() => {
+      setOpenProfile(false)
+    }, [path])
+    
 
     return (
         <nav className={`flex items-center justify-between font-poppins py-3 px-4 fixed top-0 left-0 w-full z-10 ${scrolling && 'bg-zinc-900/[.7] shadow-lg backdrop-blur'}`}>
@@ -75,8 +82,8 @@ const Navbar = () => {
                                 <div className='font-medium'>{user.name}</div>
                                 <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
                             </div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <Link href='/profile' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</Link>
+                            <Link href='/privacy' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</Link>
                             <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
                         </div>
                     )}
@@ -102,9 +109,9 @@ const Navbar = () => {
                                 <div className='font-medium'>{user.name}</div>
                                 <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
                             </div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Shop(Add item, inventory)</div>
-                            <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</div>
+                            <Link href='/profile' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiUser /> Profile</Link>
+                            <Link href='/shop' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Shop(Add item, inventory)</Link>
+                            <Link href='/privacy' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen />Privacy Policy</Link>
                             <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut />Logout</div>
                         </div>
                     )}

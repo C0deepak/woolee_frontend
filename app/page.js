@@ -24,7 +24,30 @@ export default function Home() {
       <div className='pb-0 p-10 relative'>
         <img src="/img/bg1.png" alt="" className='absolute top-0 left-0 w-60 z-0' />
         <img src="/img/bg1.png" alt="" className='absolute bottom-0 right-0 w-60 z-0' />
-        {isLoggedIn && user.role === 'user' || !isLoggedIn && (
+        {isLoggedIn && user.role === 'user' && (
+          <div className='relative flex gap-10 p-10'>
+            <div className='w-[30%]'>
+              <img src="/img/bg.webp" alt="" className='w-full' />
+            </div>
+            <div className='flex justify-center flex-col w-[70%]'>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
+
+              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
+                <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
+              </Link>
+              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
+                <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
+              </Link>
+              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
+                <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
+              </Link>
+            </div>
+          </div>
+        )}
+        {!isLoggedIn && (
           <div className='relative flex gap-10 p-10'>
             <div className='w-[30%]'>
               <img src="/img/bg.webp" alt="" className='w-full' />
@@ -55,15 +78,15 @@ export default function Home() {
             <div className='flex justify-center flex-col w-[70%]'>
               <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>Create your own shop and <span className='text-zinc-900'>start your journey</span></div>
 
-              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f1.png" alt="" className='w-10 h-10' /> List Products</div>
                 <div className='text-zinc-900 pl-14'>Empower your business by showcasing your products effortlessly. List your offerings with ease and reach a wider audience, turning potential customers into satisfied clients.</div>
               </Link>
-              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f2.png" alt="" className='w-10 h-10' /> View Inventories</div>
                 <div className='text-zinc-900 pl-14'>Streamline your operations with a centralized inventory hub. View and manage your entire stock in one place, ensuring real-time visibility and efficient control over your products.</div>
               </Link>
-              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f3.png" alt="" className='w-10 h-10' /> Get the Best Price</div>
                 <div className='text-zinc-900 pl-14'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices. Whether you're a buyer or seller, our commitment to competitive pricing ensures unparalleled deals for everyone involved</div>
               </Link>
@@ -78,15 +101,15 @@ export default function Home() {
             <div className='flex justify-center flex-col w-[70%]'>
               <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>Create your own shop and <span className='text-zinc-900'>start your journey</span></div>
 
-              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f1.png" alt="" className='w-10 h-10' /> List Products</div>
                 <div className='text-zinc-900 pl-14'>Empower your business by showcasing your products effortlessly. List your offerings with ease and reach a wider audience, turning potential customers into satisfied clients.</div>
               </Link>
-              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f2.png" alt="" className='w-10 h-10' /> View Inventories</div>
                 <div className='text-zinc-900 pl-14'>Streamline your operations with a centralized inventory hub. View and manage your entire stock in one place, ensuring real-time visibility and efficient control over your products.</div>
               </Link>
-              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
                 <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f3.png" alt="" className='w-10 h-10' /> Get the Best Price</div>
                 <div className='text-zinc-900 pl-14'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices. Whether you're a buyer or seller, our commitment to competitive pricing ensures unparalleled deals for everyone involved</div>
               </Link>

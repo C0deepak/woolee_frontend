@@ -1,9 +1,13 @@
 'use client'
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const { push } = useRouter();
+    const path = usePathname();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(getStoredUser());
 
@@ -28,6 +32,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('wuser', JSON.stringify(userData));
             setUser(userData);
             setIsLoggedIn(true);
+            push('/');
         }
     };
 
@@ -36,6 +41,10 @@ export const AuthProvider = ({ children }) => {
             localStorage.removeItem('wuser');
             setUser(null);
             setIsLoggedIn(false);
+
+            if (path !== '/marketplace' && path !== '/resources') {
+                push('/')
+            }
         }
     };
 

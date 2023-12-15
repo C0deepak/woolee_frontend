@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 import { useAuth } from '@/context/authContext';
+import Loader from '@/components/Loader';
 
 const ProducerRegister = () => {
-    const { isLoggedIn, user } = useAuth();
+    const { isLoggedIn, user, login } = useAuth();
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         farm_name: '',
         phone: '',
@@ -24,8 +26,6 @@ const ProducerRegister = () => {
             console.log('Login to access the feature!')
             return;
         }
-        console.log(token)
-        console.log(isLoggedIn)
 
         const config = {
             headers: {
@@ -33,12 +33,19 @@ const ProducerRegister = () => {
                 Authorization: `Token ${user.token}`,
             },
         };
-
+        setIsLoading(true)
         try {
             const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/producers', formData, config);
-            console.log('Registration successful', response.data.message);
+            console.log('Registration as a producer successful', response.data.message);
+            const userData = {
+                ...user,
+                role: 'producer'
+            }
+            login(userData)
+            setIsLoading(false)
         } catch (error) {
-            console.error('Registration failed', error);
+            console.error('Registration as a producer failed', error);
+            setIsLoading(false)
         }
     };
 
@@ -73,6 +80,7 @@ const ProducerRegister = () => {
 
     return (
         <div className='flex w-full relative font-poppins'>
+            {isLoading && (<Loader />)}
             <div className='w-1/3 min-h-screen bg-zinc-900'></div>
             <div className='w-2/3 min-h-screen'></div>
 

@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
 import { useAuth } from '@/context/authContext';
+import Loader from '@/components/Loader';
 
 const Login = () => {
   const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,18 +18,21 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-
+    setIsLoading(true)
     try {
       const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/login', formData);
       console.log('Login successful', response.data.message);
       login(response.data.user);
+      setIsLoading(false)
     } catch (error) {
       console.error('Login failed', error);
+      setIsLoading(false)
     }
   };
 
   return (
     <div className='flex w-full relative font-poppins'>
+      {isLoading && (<Loader />)}
       <div className='w-1/3 min-h-screen bg-zinc-900'></div>
       <div className='w-2/3 min-h-screen'></div>
 
@@ -54,7 +59,7 @@ const Login = () => {
 
           <div className='w-full flex flex-col gap-2'>
             <button className='text-sm bg-zinc-900 text-white rounded-full py-2 px-5 max-w-fit' onClick={handleSubmit}>Login</button>
-            <div className='text-xs'>New user ? <Link href='/producer-register' className='font-bold'>Register</Link></div>
+            <div className='text-xs'>New user ? <Link href='/register' className='font-bold'>Register</Link></div>
           </div>
         </div>
       </div>

@@ -2,9 +2,12 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios';
+import { useAuth } from '@/context/authContext';
+import Loader from '@/components/Loader';
 
 const Register = () => {
-
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -16,17 +19,21 @@ const Register = () => {
   };
 
   const handleSubmit = async () => {
-
+    setIsLoading(true)
     try {
       const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/register', formData);
       console.log('Registration successful', response.data.message);
+      login(response.data.user);
+      setIsLoading(false)
     } catch (error) {
       console.error('Registration failed', error);
+      setIsLoading(false)
     }
   };
 
   return (
     <div className='flex w-full relative font-poppins'>
+      {isLoading && (<Loader />)}
       <div className='w-1/3 min-h-screen bg-zinc-900'></div>
       <div className='w-2/3 min-h-screen'></div>
 
