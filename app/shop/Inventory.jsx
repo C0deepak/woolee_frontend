@@ -1,9 +1,12 @@
+'use client'
 import InventoryCard from '@/components/cards/InventoryCard'
-import React from 'react'
+import InventoryModal from '@/components/modals/InventoryModal'
+import React, { useState } from 'react'
 import { FiChevronDown, FiMapPin } from 'react-icons/fi'
 import { IoMdSearch } from 'react-icons/io'
 
 const Inventory = () => {
+    const [openModal, setOpenModal] = useState(false)
     return (
         <div className='flex flex-col gap-8'>
             <div className='flex justify-center gap-8'>
@@ -26,6 +29,10 @@ const Inventory = () => {
                 <InventoryCard />
                 <InventoryCard />
             </div>
+
+            <div onClick={() => setOpenModal(true)} className='fixed bottom-2 right-2 px-8 py-2 bg-zinc-900 text-zinc-100 font-medium rounded-full text-sm border border-zinc-100 cursor-pointer'>Add Product</div>
+
+            {openModal && <InventoryModal closeModal={() => setOpenModal(!openModal)} />}
         </div>
     )
 }

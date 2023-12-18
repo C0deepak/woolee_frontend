@@ -1,8 +1,10 @@
 import ProductSaleCard1 from '@/components/cards/ProductSaleCard1'
-import React from 'react'
+import SaleModal from '@/components/modals/SaleModal'
+import React, { useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 
 const Sale = () => {
+  const[openModal, setOpenModal] = useState(false)
   return (
     <div className='flex flex-col items-center gap-8'>
       <div className='flex justify-center'>
@@ -19,6 +21,9 @@ const Sale = () => {
         <ProductSaleCard1 />
         <ProductSaleCard1 />
       </div>
+      <div onClick={() => setOpenModal(true)} className='fixed bottom-2 right-2 px-8 py-2 bg-zinc-900 text-zinc-100 font-medium rounded-full text-sm border border-zinc-100 cursor-pointer'>Add Product</div>
+
+      {openModal && <SaleModal closeModal={() => setOpenModal(!openModal)}/>}
     </div>
   )
 }
