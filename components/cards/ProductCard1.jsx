@@ -3,7 +3,7 @@ import React from 'react'
 
 const ProductCard1 = ({product}) => {
     return (
-        <div className='flex flex-col shadow-lg max-w-[400px] gap-3 p-4 font-poppins text-sm bg-white'>
+        <div className='flex flex-col shadow-lg max-w-[400px] min-w-[400px] gap-3 p-4 font-poppins text-sm bg-white'>
             <div className='text-zinc-950 font-semibold'>{product?.batch?.type}</div>
 
             <div className='flex  gap-[0.8rem] text-zinc-400 text-xs'>

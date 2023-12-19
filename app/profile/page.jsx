@@ -2,6 +2,7 @@
 import { useAuth } from '@/context/authContext'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { FaUsers } from 'react-icons/fa6';
 import { GiMoneyStack, GiReceiveMoney, GiSheep, GiTakeMyMoney } from 'react-icons/gi'
 import { SiWebmoney } from 'react-icons/si'
 
@@ -71,15 +72,28 @@ const Profile = () => {
             <p>In Inventory</p>
           </div>
         </div>
-        <div className="bg-zinc-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-zinc-600 dark:border-gray-600 text-white font-medium group">
-          <div className="flex justify-center items-center w-14 h-14 bg-white text-zinc-800 rounded-full transition-all duration-300 transform group-hover:rotate-12">
-            <GiSheep size={30} />
+        {isLoggedIn && user.role === 'producer' && (
+          <div className="bg-zinc-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-zinc-600 dark:border-gray-600 text-white font-medium group">
+            <div className="flex justify-center items-center w-14 h-14 bg-white text-zinc-800 rounded-full transition-all duration-300 transform group-hover:rotate-12">
+              <GiSheep size={30} />
+            </div>
+            <div className="text-right">
+              <p className="text-2xl">{profileData?.details?.sheep_count}</p>
+              <p>Sheep count</p>
+            </div>
           </div>
-          <div className="text-right">
-            <p className="text-2xl">{profileData?.details?.sheep_count}</p>
-            <p>Sheep count</p>
+        )}
+        {isLoggedIn && user.role === 'processor' && (
+          <div className="bg-zinc-800 dark:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-zinc-600 dark:border-gray-600 text-white font-medium group">
+            <div className="flex justify-center items-center w-14 h-14 bg-white text-zinc-800 rounded-full transition-all duration-300 transform group-hover:rotate-12">
+              <FaUsers size={30} />
+            </div>
+            <div className="text-right">
+              <p className="text-2xl">{profileData?.details?.labour_count}</p>
+              <p>Labour count</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
         <form>

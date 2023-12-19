@@ -17,7 +17,7 @@ const Sold = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/orders', config);
+                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/solditems', config);
                 console.log(response.data)
             } catch (error) {
                 console.error('Error fetching data:', error);

@@ -6,13 +6,35 @@ import BannerData from '@/utils/BannerData'
 import Link from 'next/link'
 import { BsJournalBookmark, BsShop } from 'react-icons/bs'
 import ProductCard1 from '@/components/cards/ProductCard1'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Loader from '@/components/Loader'
 
 export default function Home() {
   const { isLoggedIn, user } = useAuth()
+  // const [isLoading, setIsLoading] = useState(false)
+  // const [marketPlace, setMarketPlace] = useState([])
+
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   const fetchMarketplace = async () => {
+  //     try {
+  //       const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
+  //       setMarketPlace(response.data.data.stores)
+  //       setIsLoading(false)
+  //     } catch (error) {
+  //       console.error('Error fetching Marketplace:', error);
+  //       setIsLoading(false)
+  //     }
+  //   };
+
+  //   fetchMarketplace();
+  // }, []);
+
   return (
     <div className='font-poppins'>
       <div className='absolute top-0 left-0 min-h-[70vh] w-full bg-zinc-800 z-0'></div>
-
+      {/* {isLoading && <Loader />} */}
       <div className='pt-24 relative flex flex-col'>
         {isLoggedIn && (<div className='font-extrabold text-2xl px-4 uppercase text-zinc-600 leading-tight'>Welcome Back! <span className='text-white'>{user?.name.split(' ')[0]}</span></div>)}
         <div className='flex flex-col gap-4'>
@@ -24,29 +46,6 @@ export default function Home() {
       <div className='pb-0 p-10 relative'>
         <img src="/img/bg1.png" alt="" className='absolute top-0 left-0 w-60 z-0' />
         <img src="/img/bg1.png" alt="" className='absolute bottom-0 right-0 w-60 z-0' />
-        {isLoggedIn && user.role === 'user' && (
-          <div className='relative flex gap-10 p-10'>
-            <div className='w-[30%]'>
-              <img src="/img/bg.webp" alt="" className='w-full' />
-            </div>
-            <div className='flex justify-center flex-col w-[70%]'>
-              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
-
-              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
-                <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
-              </Link>
-              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
-                <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
-              </Link>
-              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
-                <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
-              </Link>
-            </div>
-          </div>
-        )}
         {!isLoggedIn && (
           <div className='relative flex gap-10 p-10'>
             <div className='w-[30%]'>
@@ -54,18 +53,25 @@ export default function Home() {
             </div>
             <div className='flex justify-center flex-col w-[70%]'>
               <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
-
               <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/farmer.png" alt="" className='w-10 h-10' /> Producers</div>
-                <div className='text-zinc-900 pl-14'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/farmer.png" alt="" className='w-8 h-8' /> Producers</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool producers are vital to the textile industry because they raise sheep, shear them, and then gather their fleece.</div>
               </Link>
-              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/processor.png" alt="" className='w-10 h-10' /> Processors</div>
-                <div className='text-zinc-900 pl-14'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
+              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/shearer.png" alt="" className='w-8 h-8' /> Shearer</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
               </Link>
               <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/buyer.png" alt="" className='w-10 h-10' /> Buyers</div>
-                <div className='text-zinc-900 pl-14'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/collector.png" alt="" className='w-8 h-8' /> Collector(Registered By government)</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool collector collects the sheared wool and grade them to nearest grading centers then make a batches out of them of similar kind.</div>
+              </Link>
+              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/processor.png" alt="" className='w-8 h-8' /> Processors</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
+              </Link>
+              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/buyer.png" alt="" className='w-8 h-8' /> Buyers(Normal User)</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
               </Link>
             </div>
           </div>
@@ -73,22 +79,27 @@ export default function Home() {
         {(isLoggedIn && user.role === 'producer') && (
           <div className='relative flex gap-10 p-10'>
             <div className='w-[30%]'>
-              <img src="/img/bgf.jpg" alt="" className='w-full' />
+              <img src="/img/bgp.jpg" alt="" className='w-full' />
             </div>
             <div className='flex justify-center flex-col w-[70%]'>
-              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>Create your own shop and <span className='text-zinc-900'>start your journey</span></div>
-
-              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f1.png" alt="" className='w-10 h-10' /> List Products</div>
-                <div className='text-zinc-900 pl-14'>Empower your business by showcasing your products effortlessly. List your offerings with ease and reach a wider audience, turning potential customers into satisfied clients.</div>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>You can request Shearing <span className='text-zinc-900'>from nearest shearer</span></div>
+              <Link href='/requestshearing' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase text-xl'><img src="/img/shearer.png" alt="" className='w-10 h-10' /> Shearer</div>
+                <div className='text-zinc-900 pl-14'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
               </Link>
-              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f2.png" alt="" className='w-10 h-10' /> View Inventories</div>
-                <div className='text-zinc-900 pl-14'>Streamline your operations with a centralized inventory hub. View and manage your entire stock in one place, ensuring real-time visibility and efficient control over your products.</div>
-              </Link>
-              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f3.png" alt="" className='w-10 h-10' /> Get the Best Price</div>
-                <div className='text-zinc-900 pl-14'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices. Whether you're a buyer or seller, our commitment to competitive pricing ensures unparalleled deals for everyone involved</div>
+            </div>
+          </div>
+        )}
+        {(isLoggedIn && user.role === 'shearer') && (
+          <div className='relative flex gap-10 p-10'>
+            <div className='w-[30%]'>
+              <img src="/img/bgp.jpg" alt="" className='w-full' />
+            </div>
+            <div className='flex justify-center flex-col w-[70%]'>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>You will get direct <span className='text-zinc-900'>Shearing request</span></div>
+              <Link href='/requestedshearing' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase text-xl'><img src="/img/shearer.png" alt="" className='w-10 h-10' /> Shearer</div>
+                <div className='text-zinc-900 pl-14'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
               </Link>
             </div>
           </div>
@@ -102,16 +113,47 @@ export default function Home() {
               <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>Create your own shop and <span className='text-zinc-900'>start your journey</span></div>
 
               <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f1.png" alt="" className='w-10 h-10' /> List Products</div>
-                <div className='text-zinc-900 pl-14'>Empower your business by showcasing your products effortlessly. List your offerings with ease and reach a wider audience, turning potential customers into satisfied clients.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f1.png" alt="" className='w-8 h-8' /> List Products</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Empower your business by showcasing your products effortlessly.</div>
               </Link>
               <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f2.png" alt="" className='w-10 h-10' /> View Inventories</div>
-                <div className='text-zinc-900 pl-14'>Streamline your operations with a centralized inventory hub. View and manage your entire stock in one place, ensuring real-time visibility and efficient control over your products.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f2.png" alt="" className='w-8 h-8' /> View Inventories</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Streamline your operations with a centralized inventory hub.</div>
               </Link>
               <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold text-xl uppercase'><img src="/img/f3.png" alt="" className='w-10 h-10' /> Get the Best Price</div>
-                <div className='text-zinc-900 pl-14'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices. Whether you're a buyer or seller, our commitment to competitive pricing ensures unparalleled deals for everyone involved</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f3.png" alt="" className='w-8 h-8' /> Get the Best Price</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices.</div>
+              </Link>
+            </div>
+          </div>
+        )}
+        {isLoggedIn && user.role === 'user' && (
+          <div className='relative flex gap-10 p-10'>
+            <div className='w-[30%]'>
+              <img src="/img/bg.webp" alt="" className='w-full' />
+            </div>
+            <div className='flex justify-center flex-col w-[70%]'>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>come and let's serve the country <span className='text-zinc-900'>register as</span></div>
+
+              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/farmer.png" alt="" className='w-8 h-8' /> Producers</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool producers are vital to the textile industry because they raise sheep.</div>
+              </Link>
+              <Link href='/producer-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/shearer.png" alt="" className='w-8 h-8' /> Shearer</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
+              </Link>
+              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/collector.png" alt="" className='w-8 h-8' /> Collector(Registered By government)</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool collector collects the sheared wool and grade them to nearest grading centers then make a batches out of them of similar kind.</div>
+              </Link>
+              <Link href='/processor-register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/processor.png" alt="" className='w-8 h-8' /> Processors</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool processors are essential intermediaries in the textile supply chain, transforming raw wool from producers into refined and market-ready materials.</div>
+              </Link>
+              <Link href='/register' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/buyer.png" alt="" className='w-8 h-8' /> Buyers(Normal User)</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool purchasers establish ties with producers and closely monitor market trends to enable the seamless flow of raw materials in the textile supply chain.</div>
               </Link>
             </div>
           </div>
@@ -121,11 +163,9 @@ export default function Home() {
       <div className='p-10'>
         <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><BsShop /> Explore the marketplace</div>
         <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-          <ProductCard1 />
-          <ProductCard1 />
-          <ProductCard1 />
-          <ProductCard1 />
-          <ProductCard1 />
+          {/* {marketPlace?.map((product) => (
+            <ProductCard1 key={product.id} product={product} />
+          ))} */}
         </div>
       </div>
 

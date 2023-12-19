@@ -22,7 +22,7 @@ const Marketplace = () => {
         const fetchMarketplace = async () => {
             try {
                 const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
-                const result = await response.data.data;
+                const result = await response.data.data.stores;
 
                 // Split the data into two arrays based on odd and even indices
                 const newArray1 = result.filter((_, index) => index % 2 === 0);

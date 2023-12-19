@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 import { FiShoppingCart } from "react-icons/fi";
 
@@ -34,12 +35,12 @@ const ProductCard2 = ({product}) => {
             <div className='text-zinc-950 text-xs font-medium'>Lorem ipsum, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, dolorum. dolor sit amet consectetur adipisicing elit. Molestias, nisi!</div>
             <div className='flex justify-between'>
                 <div className='flex justify-around gap-1 items-center py-1 px-6 h-8 rounded-3xl border-2 border-zinc-950' >
-                    <button className='w-fit text-zinc-950 '>Add to cart</button>
+                    <button className='w-fit text-zinc-950 '>Buy Now</button>
                     <FiShoppingCart />
                 </div>
-                <div className='flex justify-center' >
+                <Link href={`/marketplace/${product?.id}`} className='flex justify-center' >
                     <button className='w-fit py-1 px-6 bg-zinc-950 h-8 text-zinc-100 rounded-3xl hover:text-zinc-100'>See more...</button>
-                </div>
+                </Link>
             </div>
         </div>
     )
