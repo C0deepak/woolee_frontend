@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const ProductCard1 = ({product}) => {
@@ -33,9 +34,9 @@ const ProductCard1 = ({product}) => {
             </div>
 
             <div className='text-zinc-950 text-xs font-medium'>Lorem ipsum, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, dolorum. dolor sit amet consectetur adipisicing elit. Molestias, nisi!</div>
-            <div className='flex justify-center' >
+            <Link className='flex justify-center' href={`/marketplace/${product?.id}`} >
                 <button className='w-fit py-1 px-8 bg-zinc-950 h-8 text-zinc-100 rounded-3xl hover:bg-zinc-800 hover:text-zinc-100'>See more</button>
-            </div>
+            </Link>
         </div>
     )
 }
