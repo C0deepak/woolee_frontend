@@ -1,8 +1,16 @@
 import React from 'react'
+import { FiShoppingCart } from "react-icons/fi";
 
 const ProductDetail = () => {
   return (
     <div  className='min-h-screen pt-20 px-10'>
+      <div className='flex justify-end'>
+
+     <div className='flex justify-around gap-1 items-center py-1 px-6 h-8 rounded-3xl border-2 border-zinc-950' >
+                    <button className='w-fit text-zinc-950 '>Add to cart</button>
+                    <FiShoppingCart />
+                </div>
+      </div>
       <div className='flex flex-col gap-10  border-b-2 max-h-[300px] justify-center px-4 py-4'>
         <div className='font-semibold text-base text-zinc-800'>BATCH DETAILS</div>
         <div className='flex gap-20'>
