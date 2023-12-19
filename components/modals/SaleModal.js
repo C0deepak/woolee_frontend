@@ -57,9 +57,9 @@ const SaleModal = ({ closeModal }) => {
 
 
     return (
-        <div className='w-screen h-screen flex items-center justify-center fixed top-0 left-0 z-50 bg-zinc-500/[0.5]'>
+        <div className='w-screen h-screen flex items-center justify-center fixed top-0 left-0 z-40 bg-zinc-500/[0.5]'>
             {isLoading && (<Loader />)}
-            <div className='relative w-[600px] max-h-[90%] flex flex-col gap-8 p-8 m-auto shadow bg-white z-50 overflow-y-auto'>
+            <div className='relative w-[600px] max-h-[90%] flex flex-col gap-8 p-8 m-auto shadow bg-white z-40 overflow-y-auto'>
                 <div onClick={closeModal} className='absolute right-2 top-2 cursor-pointer'><IoCloseCircleSharp size={26} /></div>
                 <div className='w-full flex flex-col'>
                     <div className='font-semibold text-2xl'>Add Product</div>
