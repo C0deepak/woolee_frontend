@@ -6,6 +6,7 @@ import { IoCloseCircleSharp } from 'react-icons/io5'
 
 const InventoryModal = ({ closeModal }) => {
   const { user } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     type: '',
     quantity: '',
@@ -20,6 +21,7 @@ const InventoryModal = ({ closeModal }) => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true)
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -29,9 +31,11 @@ const InventoryModal = ({ closeModal }) => {
     try {
       const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/batches', formData, config);
       console.log('Batch Added successfully', response.data.message);
+      setIsLoading(false)
       closeModal()
     } catch (error) {
       console.error('Batch Not Added - failed', error);
+      setIsLoading(false)
     }
   };
 

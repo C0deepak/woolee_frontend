@@ -3,10 +3,12 @@ import { useAuth } from '@/context/authContext'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IoCloseCircleSharp } from 'react-icons/io5'
+import Loader from '../Loader'
 
 const SaleModal = ({ closeModal }) => {
     const { user } = useAuth()
     const [batch, setBatch] = useState()
+    const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         batch: '',
         price: '',
@@ -17,6 +19,7 @@ const SaleModal = ({ closeModal }) => {
     };
 
     const handleSubmit = async () => {
+        setIsLoading(true)
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -26,8 +29,11 @@ const SaleModal = ({ closeModal }) => {
         try {
             const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/stores', formData, config);
             console.log('Product Added successfully', response.data.message);
+            setIsLoading(false)
+            closeModal()
         } catch (error) {
             console.error('Product Not Added - failed', error);
+            setIsLoading(false)
         }
     };
 
@@ -52,6 +58,7 @@ const SaleModal = ({ closeModal }) => {
 
     return (
         <div className='w-screen h-screen flex items-center justify-center fixed top-0 left-0 z-50 bg-zinc-500/[0.5]'>
+            {isLoading && (<Loader />)}
             <div className='relative w-[600px] max-h-[90%] flex flex-col gap-8 p-8 m-auto shadow bg-white z-50 overflow-y-auto'>
                 <div onClick={closeModal} className='absolute right-2 top-2 cursor-pointer'><IoCloseCircleSharp size={26} /></div>
                 <div className='w-full flex flex-col'>

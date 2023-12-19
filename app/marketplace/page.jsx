@@ -187,8 +187,8 @@ const Marketplace = () => {
             <div className='flex flex-col px-8'>
                 <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><LuFlame /> Trending Now</div>
                 <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-                    {marketPlace1?.map((batch) => (
-                        <ProductCard1 key={batch.id} batch={batch} />
+                    {marketPlace1?.map((product) => (
+                        <ProductCard1 key={product.id} product={product} />
                     ))}
                 </div>
             </div>
