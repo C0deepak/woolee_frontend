@@ -1,25 +1,25 @@
 import React from 'react'
 import { FiEdit3 } from 'react-icons/fi'
 
-const ProductSaleCard1 = () => {
+const ProductSaleCard1 = ({ product }) => {
     return (
         <div className='flex flex-col shadow-lg w-[380px] gap-3 p-4 font-poppins text-sm bg-white'>
-            <div className='text-zinc-950 font-semibold'>Pashmina Wool (Cashmere)</div>
+            <div className='text-zinc-950 font-semibold'>{product?.batch?.type}</div>
 
             <div className='flex  gap-[0.8rem] text-zinc-400 text-xs'>
                 <div className='flex gap-[0.2rem]'>
                     <div> <img src="/img/c2.jpeg" alt="" className='w-4 h-4 rounded-full' /></div>
                     <div>A+ Certified</div>
                 </div>
-                <div>Posted - 12hrs ago</div>
+                <div>Posted - {product?.batch?.production_date}</div>
             </div>
             <div className='flex gap-[1.2rem] flex-wrap'>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'><span>&#8377;</span>6194/Kg</div>
+                    <div className='text-zinc-950 font-semibold text-xs'><span>&#8377;</span>{product?.price}/Kg</div>
                     <div className=' text-zinc-400 text-xs'>Price</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>91mm</div>
+                    <div className='text-zinc-950 font-semibold text-xs'>{product?.batch?.thickness} mm</div>
                     <div className=' text-zinc-400 text-xs'>Thickness</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
@@ -27,16 +27,16 @@ const ProductSaleCard1 = () => {
                     <div className=' text-zinc-400 text-xs'>Colour</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>Lightly Soft</div>
+                    <div className='text-zinc-950 font-semibold text-xs'>{product?.batch?.softness}</div>
                     <div className=' text-zinc-400 text-xs'>Softness</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>120 Kg</div>
+                    <div className='text-zinc-950 font-semibold text-xs'>{product?.batch?.quantity} Kg</div>
                     <div className=' text-zinc-400 text-xs'>Quantity</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>#124532</div>
-                    <div className=' text-zinc-400 text-xs'>P_Id</div>
+                    <div className='text-zinc-950 font-semibold text-xs'>{product?.batch?.id}</div>
+                    <div className=' text-zinc-400 text-xs'>B_Id</div>
                 </div>
             </div>
             <div className='text-zinc-950 text-xs font-medium'>Lorem ipsum, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, dolorum. dolor sit amet consectetur adipisicing elit. Molestias, nisi!</div>

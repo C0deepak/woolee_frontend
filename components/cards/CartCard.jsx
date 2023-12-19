@@ -4,12 +4,9 @@ const CartCard = () => {
     return (
         <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
             <div className="flex w-2/5">
-                <div className="w-20">
-                    <img className="h-24" src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z" alt="" />
-                </div>
                 <div className="flex flex-col justify-between ml-4 flex-grow">
-                    <span className="font-bold text-sm">Iphone 6S</span>
-                    <span className="text-red-500 text-xs">Apple</span>
+                    <span className="font-bold text-sm">Angora Wool</span>
+                    <span className="text-zinc-700 text-xs">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, quo!</span>
                     <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                 </div>
             </div>

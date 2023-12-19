@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { IoMdSearch } from "react-icons/io"
 import { GiWool } from "react-icons/gi";
 import ProductCard1 from '@/components/cards/ProductCard1';
@@ -8,10 +9,41 @@ import BannerSlider from '@/components/Slider/BannerSlider';
 import { FiGift } from 'react-icons/fi';
 import { LuFlame } from 'react-icons/lu';
 import { TbMoodHeart } from 'react-icons/tb';
+import Loader from '@/components/Loader';
+import axios from 'axios';
+
 const Marketplace = () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [marketPlace1, setMarketPlace1] = useState([])
+    const [marketPlace2, setMarketPlace2] = useState([])
+
+    useEffect(() => {
+        setIsLoading(true)
+        const fetchMarketplace = async () => {
+            try {
+                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
+                const result = await response.data.data;
+
+                // Split the data into two arrays based on odd and even indices
+                const newArray1 = result.filter((_, index) => index % 2 === 0);
+                const newArray2 = result.filter((_, index) => index % 2 !== 0);
+
+                // Set the state for the two arrays
+                setMarketPlace1(newArray1);
+                setMarketPlace2(newArray2);
+                setIsLoading(false)
+            } catch (error) {
+                console.error('Error fetching Marketplace:', error);
+                setIsLoading(false)
+            }
+        };
+
+        fetchMarketplace();
+    }, []);
+
     return (
         <div className='flex flex-col gap-10 font-poppins'>
-
+            {isLoading && (<Loader />)}
             <div className='bg-zinc-800 pb-8'>
                 <div className='mt-20 flex justify-center'>
                     <div className='flex items-center gap-2 w-96 text-zinc-100 text-sm rounded-3xl px-4 py-1.5 border-2 border-zinc-400'>
@@ -148,19 +180,16 @@ const Marketplace = () => {
             {/* Exclusive offers section */}
             <div className='flex flex-col px-8'>
                 <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><FiGift /> Exclusive Offers</div>
-                <div className='py-8'><BannerSlider data={OfferData}/></div>
+                <div className='py-8'><BannerSlider data={OfferData} /></div>
             </div>
 
             {/* Trending Now Section */}
             <div className='flex flex-col px-8'>
                 <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><LuFlame /> Trending Now</div>
                 <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-                    {Array(6)
-                        .fill(true)
-                        .map((item, index) => (
-                            <ProductCard1 key={index} />
-                        ))}
-
+                    {marketPlace1?.map((batch) => (
+                        <ProductCard1 key={batch.id} batch={batch} />
+                    ))}
                 </div>
             </div>
 
@@ -168,12 +197,9 @@ const Marketplace = () => {
             <div className='flex flex-col px-8'>
                 <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><TbMoodHeart /> Just for You</div>
                 <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-                    {Array(6)
-                        .fill(true)
-                        .map((item, index) => (
-                            <ProductCard2 key={index} />
-                        ))}
-
+                    {marketPlace2?.map((product) => (
+                        <ProductCard2 key={product.id} product={product} />
+                    ))}
                 </div>
             </div>
 
