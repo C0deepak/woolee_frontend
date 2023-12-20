@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { GoDotFill } from 'react-icons/go'
-import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn, FiBookmark, FiSettings, FiBriefcase, FiBox } from 'react-icons/fi'
+import { FiUser, FiLogOut, FiBookOpen, FiChevronDown, FiChevronUp, FiLogIn, FiBookmark, FiSettings, FiBriefcase, FiBox, FiGrid } from 'react-icons/fi'
 import { MdOutlineDesignServices, MdShoppingCartCheckout } from 'react-icons/md'
 import { BsShop } from 'react-icons/bs'
 import { useAuth } from '@/context/authContext'
@@ -55,7 +55,7 @@ const Navbar = () => {
                                 <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
                             </div>
                             <Link href='/requestshearer' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiSettings /> Request Shearing</Link>
-                            {/* <Link href='/myshearingrequest' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdShoppingCartCheckout /> My Orders</Link> */}
+                            <Link href='/services' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiGrid /> Request Services</Link>
                             <Link href='/privacy' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen /> Privacy Policy</Link>
                             <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut /> Logout</div>
                         </div>

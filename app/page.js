@@ -88,16 +88,8 @@ export default function Home() {
                 <div className='text-zinc-900 pl-14 text-xs'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
               </Link>
               <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f1.png" alt="" className='w-8 h-8' /> List Products</div>
-                <div className='text-zinc-900 pl-14 text-xs'>Empower your business by showcasing your products effortlessly.</div>
-              </Link>
-              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f2.png" alt="" className='w-8 h-8' /> View Inventories</div>
-                <div className='text-zinc-900 pl-14 text-xs'>Streamline your operations with a centralized inventory hub.</div>
-              </Link>
-              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f3.png" alt="" className='w-8 h-8' /> Get the Best Price</div>
-                <div className='text-zinc-900 pl-14 text-xs'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f1.png" alt="" className='w-8 h-8' /> Request Services</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Can request services from different processors/service providers.</div>
               </Link>
             </div>
           </div>
