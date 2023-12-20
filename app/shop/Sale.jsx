@@ -1,6 +1,6 @@
 import Loader from '@/components/Loader'
 import ProductSaleCard1 from '@/components/cards/ProductSaleCard1'
-import SaleModal from '@/components/modals/SaleModal'
+import SaleModal1 from '@/components/modals/SaleModal1'
 import { useAuth } from '@/context/authContext'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -22,7 +22,8 @@ const Sale = () => {
         },
       };
       try {
-        const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/mystore', config);
+        const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mystore`, config);
+        console.log(response.data)
         setStore(response.data)
         setIsLoading(false)
       } catch (error) {
@@ -48,7 +49,7 @@ const Sale = () => {
       </div>
       <div onClick={() => setOpenModal(true)} className='fixed bottom-2 right-2 px-8 py-2 bg-zinc-900 text-zinc-100 font-medium rounded-full text-sm border border-zinc-100 cursor-pointer'>Add Product</div>
 
-      {openModal && <SaleModal closeModal={() => setOpenModal(!openModal)} />}
+      {openModal && <SaleModal1 closeModal={() => setOpenModal(!openModal)} />}
     </div>
   )
 }

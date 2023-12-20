@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { IoCloseCircleSharp } from 'react-icons/io5'
 import Loader from '../Loader'
 
-const SaleModal = ({ closeModal }) => {
+const SaleModal1 = ({ closeModal }) => {
     const { user } = useAuth()
     const [batch, setBatch] = useState()
     const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +27,7 @@ const SaleModal = ({ closeModal }) => {
             },
         };
         try {
-            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/stores', formData, config);
+            const response = await axios.post(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/stores`, formData, config);
             console.log('Product Added successfully', response.data.message);
             setIsLoading(false)
             closeModal()
@@ -38,6 +38,7 @@ const SaleModal = ({ closeModal }) => {
     };
 
     useEffect(() => {
+        setIsLoading(true)
         const fetchBatch = async () => {
             const config = {
                 headers: {
@@ -46,10 +47,12 @@ const SaleModal = ({ closeModal }) => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/batch/search', config);
+                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mybatch`, config);
                 setBatch(response.data)
+                setIsLoading(false)
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setIsLoading(false)
             }
         };
         fetchBatch();
@@ -97,4 +100,4 @@ const SaleModal = ({ closeModal }) => {
     )
 }
 
-export default SaleModal
+export default SaleModal1

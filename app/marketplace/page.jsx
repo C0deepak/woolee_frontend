@@ -14,23 +14,16 @@ import axios from 'axios';
 
 const Marketplace = () => {
     const [isLoading, setIsLoading] = useState(false)
-    const [marketPlace1, setMarketPlace1] = useState([])
-    const [marketPlace2, setMarketPlace2] = useState([])
+    const [rawWool, setRawWool] = useState([])
+    const [processedWool, setProcessedWool] = useState([])
 
     useEffect(() => {
         setIsLoading(true)
         const fetchMarketplace = async () => {
             try {
                 const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
-                const result = await response.data.data.stores;
-
-                // Split the data into two arrays based on odd and even indices
-                const newArray1 = result.filter((_, index) => index % 2 === 0);
-                const newArray2 = result.filter((_, index) => index % 2 !== 0);
-
-                // Set the state for the two arrays
-                setMarketPlace1(newArray1);
-                setMarketPlace2(newArray2);
+                setProcessedWool(response.data.data.processed_wool);
+                setRawWool(response.data.data.raw_wool);
                 setIsLoading(false)
             } catch (error) {
                 console.error('Error fetching Marketplace:', error);
@@ -183,21 +176,19 @@ const Marketplace = () => {
                 <div className='py-8'><BannerSlider data={OfferData} /></div>
             </div>
 
-            {/* Trending Now Section */}
             <div className='flex flex-col px-8'>
-                <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><LuFlame /> Trending Now</div>
+                <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><LuFlame /> Raw Wool</div>
                 <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-                    {marketPlace1?.map((product) => (
+                    {rawWool?.map((product) => (
                         <ProductCard1 key={product.id} product={product} />
                     ))}
                 </div>
             </div>
 
-            {/* just for you section */}
             <div className='flex flex-col px-8'>
-                <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><TbMoodHeart /> Just for You</div>
+                <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><TbMoodHeart /> Processed Wool</div>
                 <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-                    {marketPlace2?.map((product) => (
+                    {processedWool?.map((product) => (
                         <ProductCard2 key={product.id} product={product} />
                     ))}
                 </div>

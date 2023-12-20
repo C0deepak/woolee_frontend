@@ -23,7 +23,7 @@ const ProductSaleCard1 = ({ product }) => {
                     <div className=' text-zinc-400 text-xs'>Thickness</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>
-                    <div className='text-zinc-950 font-semibold text-xs'>Off White</div>
+                    <div className='text-zinc-950 font-semibold text-xs'>{product?.batch?.color}</div>
                     <div className=' text-zinc-400 text-xs'>Colour</div>
                 </div>
                 <div className='flex flex-col rounded-lg px-2 py-1 bg-zinc-100'>

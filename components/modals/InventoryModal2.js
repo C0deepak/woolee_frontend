@@ -1,23 +1,59 @@
 'use client'
 import { useAuth } from '@/context/authContext'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoCloseCircleSharp } from 'react-icons/io5'
+import Loader from '../Loader'
 
-const InventoryModal = ({ closeModal }) => {
+const InventoryModal1 = ({ closeModal }) => {
   const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
+  const [allProducers, setAllProducers] = useState([])
+  useEffect(() => {
+    setIsLoading(true)
+    const fetchAllProducers = async () => {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${user.token}`,
+        },
+      };
+      try {
+        const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/producers`, config);
+        setAllProducers(response.data.data)
+        setIsLoading(false)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false)
+      }
+    };
+    fetchAllProducers();
+  }, []);
+
   const [formData, setFormData] = useState({
     type: '',
     quantity: '',
     softness: '',
-    current_location: '',
+    quality_certificate_link: '',
     thickness: '',
     color: '',
+    producers: [],
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === 'producers') {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        producers: [...prevFormData.producers, value],
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -29,7 +65,7 @@ const InventoryModal = ({ closeModal }) => {
       },
     };
     try {
-      const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/batches', formData, config);
+      const response = await axios.post(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/batches`, formData, config);
       console.log('Batch Added successfully', response.data.message);
       setIsLoading(false)
       closeModal()
@@ -54,6 +90,7 @@ const InventoryModal = ({ closeModal }) => {
 
   return (
     <div className='w-screen h-screen flex items-center justify-center fixed top-0 left-0 z-40 bg-zinc-500/[0.5]'>
+      {isLoading && (<Loader />)}
       <div className='relative w-[600px] max-h-[90%] flex flex-col gap-8 p-8 m-auto shadow bg-white z-40 overflow-y-auto'>
         <div onClick={closeModal} className='absolute right-2 top-2 cursor-pointer'><IoCloseCircleSharp size={26} /></div>
         <div className='w-full flex flex-col'>
@@ -90,8 +127,8 @@ const InventoryModal = ({ closeModal }) => {
               </select>
             </div>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Current Location</label>
-              <input type='text' name="current_location" value={formData.current_location} onChange={handleChange} placeholder='In Farm' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <label className='font-medium'>Quality Certificate Link</label>
+              <input type='text' name="quality_certificate_link" value={formData.quality_certificate_link} onChange={handleChange} placeholder='In Farm' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
           </div>
           <div className='flex gap-8 w-full'>
@@ -104,6 +141,29 @@ const InventoryModal = ({ closeModal }) => {
               <input type='text' name="color" value={formData.color} onChange={handleChange} placeholder='snow white' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
           </div>
+          <div className='flex flex-col gap-2 w-full'>
+            <div className='flex flex-col gap-1 text-sm w-1/2'>
+              <label className='font-medium'>Add Producers</label>
+              <select
+                name="producers"
+                value={formData.producers} // Display the array of selected producer IDs
+                onChange={handleChange}
+                className='outline-none border-b-[1px] border-zinc-400 p-1'
+              >
+                <option value="" disabled>Select a producer</option>
+                {allProducers?.map((producer) => (
+                  <option key={producer?.id} value={producer?.id} className='text-sm'>
+                    {producer?.id} - {producer?.farm_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='flex flex-wrap gap-2'>
+              {formData?.producers?.map((p, i) => (
+                <div key={i} className='bg-zinc-200 py-.5 px-4 rounded-full'>{p}</div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className='w-full flex flex-col gap-2'>
@@ -114,4 +174,4 @@ const InventoryModal = ({ closeModal }) => {
   )
 }
 
-export default InventoryModal
+export default InventoryModal1

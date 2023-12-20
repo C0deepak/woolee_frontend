@@ -1,7 +1,7 @@
 'use client'
 import Loader from '@/components/Loader'
-import InventoryCard from '@/components/cards/InventoryCard'
-import InventoryModal from '@/components/modals/InventoryModal'
+import InventoryCard1 from '@/components/cards/InventoryCard1'
+import InventoryModal1 from '@/components/modals/InventoryModal1'
 import { useAuth } from '@/context/authContext'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -23,7 +23,7 @@ const Inventory = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/batch/search', config);
+                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mybatch`, config);
                 setInventory(response.data)
                 setIsLoading(false)
             } catch (error) {
@@ -50,13 +50,13 @@ const Inventory = () => {
             </div>
             <div className='flex flex-wrap gap-8'>
                 {inventory?.map((batch) => (
-                    <InventoryCard key={batch.id} batch={batch} />
+                    <InventoryCard1 key={batch.id} batch={batch} />
                 ))}
             </div>
 
             <div onClick={() => setOpenModal(true)} className='fixed bottom-2 right-2 px-8 py-2 bg-zinc-900 text-zinc-100 font-medium rounded-full text-sm border border-zinc-100 cursor-pointer'>Add Batch</div>
 
-            {openModal && <InventoryModal closeModal={() => setOpenModal(!openModal)} />}
+            {openModal && <InventoryModal1 closeModal={() => setOpenModal(!openModal)} />}
         </div>
     )
 }

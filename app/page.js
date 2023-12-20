@@ -104,6 +104,29 @@ export default function Home() {
             </div>
           </div>
         )}
+        {(isLoggedIn && user.role === 'collector') && (
+          <div className='relative flex gap-10 p-10'>
+            <div className='w-[30%]'>
+              <img src="/img/bgf.jpg" alt="" className='w-full' />
+            </div>
+            <div className='flex justify-center flex-col w-[70%]'>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>Create your batch and <span className='text-zinc-900'>let it rome the marketplace</span></div>
+
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f1.png" alt="" className='w-8 h-8' /> List Products</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Empower your business by showcasing your products effortlessly.</div>
+              </Link>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f2.png" alt="" className='w-8 h-8' /> View Inventories</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Streamline your operations with a centralized inventory hub.</div>
+              </Link>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f3.png" alt="" className='w-8 h-8' /> Get the Best Price</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices.</div>
+              </Link>
+            </div>
+          </div>
+        )}
         {(isLoggedIn && user.role === 'processor') && (
           <div className='relative flex gap-10 p-10'>
             <div className='w-[30%]'>
