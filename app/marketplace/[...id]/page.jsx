@@ -43,7 +43,7 @@ const ProductDetail = (props) => {
         </div>
       </div>
 
-      <div className='px-8 flex flex-col gap-4 border-b-2 justify-center px-4 py-4'>
+      <div className=' flex flex-col gap-4 border-b-2 justify-center px-4 py-4'>
         <div className='font-semibold text-base text-zinc-800'>BATCH DETAILS</div>
         <div className='flex gap-20'>
           <div className='flex flex-col gap-10'>
@@ -89,7 +89,7 @@ const ProductDetail = (props) => {
         </div>
       </div>
 
-      <div className='px-8 flex flex-col gap-4  border-b-2 max-h-[300px] justify-center px-4 py-4'>
+      <div className=' flex flex-col gap-4  border-b-2 max-h-[300px] justify-center px-4 py-4'>
         <div className='font-semibold text-base text-zinc-800'>PRODUCER DETAILS</div>
         <div className='flex gap-20'>
           <div className='flex flex-col gap-10'>
