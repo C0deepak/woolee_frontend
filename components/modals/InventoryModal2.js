@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react'
 import { IoCloseCircleSharp } from 'react-icons/io5'
 import Loader from '../Loader'
 
-const InventoryModal1 = ({ closeModal }) => {
+const InventoryModal2 = ({ closeModal }) => {
   const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
-  const [allProducers, setAllProducers] = useState([])
+  const [allOrder, setAllOrder] = useState([])
   useEffect(() => {
     setIsLoading(true)
-    const fetchAllProducers = async () => {
+    const fetchAllOrders = async () => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -19,41 +19,31 @@ const InventoryModal1 = ({ closeModal }) => {
         },
       };
       try {
-        const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/producers`, config);
-        setAllProducers(response.data.data)
+        const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/myorders`, config);
+        setAllOrder(response.data.data)
         setIsLoading(false)
       } catch (error) {
         console.error('Error fetching data:', error);
         setIsLoading(false)
       }
     };
-    fetchAllProducers();
+    fetchAllOrders();
   }, []);
 
   const [formData, setFormData] = useState({
-    type: '',
-    quantity: '',
-    softness: '',
-    quality_certificate_link: '',
-    thickness: '',
-    color: '',
-    producers: [],
+    order: '',
+    processed_quantity: '',
+    cleanliness: '',
+    texture: '',
+    color: ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === 'producers') {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        producers: [...prevFormData.producers, value],
-      }));
-    } else {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async () => {
@@ -75,18 +65,18 @@ const InventoryModal1 = ({ closeModal }) => {
     }
   };
 
-  const softnessOptions = [
-    { value: 'Plush', description: 'Luxuriously soft' },
-    { value: 'Sumptuous', description: 'Rich and extravagant' },
-    { value: 'Ethereal', description: 'Delicate and heavenly' },
-    { value: 'Opulent', description: 'Superior quality' },
-    { value: 'Velvet-Soft', description: 'Smooth like velvet' },
-    { value: 'Silken', description: 'Silky smooth' },
-    { value: 'Cashmere-Like', description: 'Comparable to cashmere' },
-    { value: 'Whisper-Soft', description: 'Soft as a whisper' },
-    { value: 'Satin-Touch', description: 'Smooth like satin' },
-    { value: 'Lustrous Softness', description: 'Soft with a subtle sheen' }
-  ];
+  const textureOptions = [
+    { "value": "Plush", "description": "Luxuriously soft, with a plush feel" },
+    { "value": "Textured", "description": "Rich texture, providing depth and character" },
+    { "value": "Smooth", "description": "Smooth and even texture" },
+    { "value": "Coarse", "description": "Coarse texture, providing a rustic feel" },
+    { "value": "Crisp", "description": "Crisp and clean texture" },
+    { "value": "Fuzzy", "description": "Soft fuzziness, creating a warm and inviting feel" },
+    { "value": "Silky", "description": "Silky texture, offering a smooth touch" },
+    { "value": "Napped", "description": "Slightly napped texture for added comfort" },
+    { "value": "Lofty", "description": "Lofty texture, providing a sense of volume" },
+    { "value": "Ribbed", "description": "Ribbed texture, adding visual interest" }
+  ]
 
   return (
     <div className='w-screen h-screen flex items-center justify-center fixed top-0 left-0 z-40 bg-zinc-500/[0.5]'>
@@ -101,67 +91,50 @@ const InventoryModal1 = ({ closeModal }) => {
         <div className='w-full flex flex-col gap-6'>
           <div className='flex gap-8 w-full'>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Type (Wool name)</label>
-              <input type='text' name="type" value={formData.type} onChange={handleChange} placeholder='Pashmina (Cashmere)' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <label className='font-medium'>Order Detail</label>
+              <select
+                name="order"
+                value={formData.order}
+                onChange={handleChange}
+                className='outline-none border-b-[1px] border-zinc-400 p-1'
+              >
+                <option value="" disabled>Select Order</option>
+                {allOrder.map((option, index) => (
+                  <option key={index} value={option?.id}>Order Id : {option?.order_id}</option>
+                ))}
+              </select>
             </div>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Quantity (Kg)</label>
-              <input type='text' name="quantity" value={formData.quantity} onChange={handleChange} placeholder='23' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <label className='font-medium'>Processed Quantity (Kg)</label>
+              <input type='text' name="processed_quantity" value={formData.processed_quantity} onChange={handleChange} placeholder='23' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
           </div>
 
 
           <div className='flex gap-8 w-full'>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Softness</label>
+              <label className='font-medium'>Texture</label>
               <select
-                name="softness"
-                value={formData.softness}
+                name="texture"
+                value={formData.texture}
                 onChange={handleChange}
                 className='outline-none border-b-[1px] border-zinc-400 p-1'
               >
-                <option value="" disabled>Select Softness</option>
-                {softnessOptions.map((option, index) => (
+                <option value="" disabled>Select Texture</option>
+                {textureOptions.map((option, index) => (
                   <option key={index} value={option.value}>{option.value} - {option.description}</option>
                 ))}
               </select>
             </div>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Quality Certificate Link</label>
-              <input type='text' name="quality_certificate_link" value={formData.quality_certificate_link} onChange={handleChange} placeholder='In Farm' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+              <label className='font-medium'>cleanliness</label>
+              <input type='text' name="cleanliness" value={formData.cleanliness} onChange={handleChange} placeholder='4.5' className='outline-none border-b-[1px] border-zinc-400 p-1' />
             </div>
           </div>
           <div className='flex gap-8 w-full'>
             <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Thickness (in mm)</label>
-              <input type='text' name="thickness" value={formData.thickness} onChange={handleChange} placeholder='95' className='outline-none border-b-[1px] border-zinc-400 p-1' />
-            </div>
-            <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Colour</label>
+              <label className='font-medium'>colour</label>
               <input type='text' name="color" value={formData.color} onChange={handleChange} placeholder='snow white' className='outline-none border-b-[1px] border-zinc-400 p-1' />
-            </div>
-          </div>
-          <div className='flex flex-col gap-2 w-full'>
-            <div className='flex flex-col gap-1 text-sm w-1/2'>
-              <label className='font-medium'>Add Producers</label>
-              <select
-                name="producers"
-                value={formData.producers} // Display the array of selected producer IDs
-                onChange={handleChange}
-                className='outline-none border-b-[1px] border-zinc-400 p-1'
-              >
-                <option value="" disabled>Select a producer</option>
-                {allProducers?.map((producer) => (
-                  <option key={producer?.id} value={producer?.id} className='text-sm'>
-                    {producer?.id} - {producer?.farm_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className='flex flex-wrap gap-2'>
-              {formData?.producers?.map((p, i) => (
-                <div key={i} className='bg-zinc-200 py-.5 px-4 rounded-full'>{p}</div>
-              ))}
             </div>
           </div>
         </div>
@@ -174,4 +147,4 @@ const InventoryModal1 = ({ closeModal }) => {
   )
 }
 
-export default InventoryModal1
+export default InventoryModal2

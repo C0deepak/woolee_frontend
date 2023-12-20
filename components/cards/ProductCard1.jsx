@@ -35,7 +35,7 @@ const ProductCard1 = ({ product }) => {
                 </div>
             </div>
 
-            <div className='text-zinc-950 text-xs font-medium flex gap-1'><div>Certification Link : </div><div>{product?.batch?.quality_certificate_link}</div></div>
+            <div className='text-zinc-950 text-xs font-medium flex gap-1'><div>Certification Link - </div><a href={product?.batch?.quality_certificate_link} className='text-zinc-900 underline'>{product?.batch?.quality_certificate_link}</a></div>
             <Link className='flex justify-center' href={`/marketplace/rawwool/${product?.id}`} >
                 <button className='w-fit py-1 px-8 bg-zinc-950 h-8 text-zinc-100 rounded-3xl hover:bg-zinc-800 hover:text-zinc-100'>See more</button>
             </Link>

@@ -92,7 +92,7 @@ const Navbar = () => {
                                 <div className='text-[10px] text-zinc-500 flex items-center gap-1'><GoDotFill />{user.email}</div>
                             </div>
                             <Link href='/shop' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBox /> Shop</Link>
-                            {/* <Link href='/shop' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><MdShoppingCartCheckout /> My Orders</Link> */}
+                            <Link href='/processorservice' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiSettings /> Services</Link>
                             <Link href='/privacy' className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2'><FiBookOpen /> Privacy Policy</Link>
                             <div className='text-zinc-600 hover:text-zinc-900 px-2 py-1.5 cursor-pointer flex items-center gap-2' onClick={logout}><FiLogOut /> Logout</div>
                         </div>

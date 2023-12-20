@@ -32,18 +32,35 @@ const ProductDetail = (props) => {
     fetchProductDetail();
   }, []);
 
+  const handleBuyNow = async () => {
+    setIsLoading(true);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${user.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/collector/orders`, config);
+      setLoading(false);
+    } catch (error) {
+      console.log('Error in ordering product');
+      setIsLoading(false)
+    }
+  };
+
   return (
     <div className='min-h-screen font-poppins'>
       {isLoading && (<Loader />)}
       <div className='px-8 h-[20vh] bg-zinc-800 pt-20 flex justify-between items-center'>
         <div className=' font-bold text-2xl text-zinc-100'>{productDetail?.batch?.type}</div>
-        <div className='flex justify-around gap-1 items-center py-1 px-6 h-8 rounded-3xl border-2 border-zinc-100 text-zinc-100'>
+        <div className='flex justify-around gap-1 items-center py-1 px-6 h-8 rounded-3xl border-2 border-zinc-100 text-zinc-100' onClick={handleBuyNow}>
           <button className='w-fit'>Buy Now</button>
           <FiShoppingCart />
         </div>
       </div>
 
-      <div className=' flex flex-col gap-4 border-b-2 justify-center px-4 py-4'>
+      <div className=' flex flex-col gap-4 border-b-2 justify-center px-8 py-8'>
         <div className='font-semibold text-base text-zinc-800'>BATCH DETAILS</div>
         <div className='flex gap-20'>
           <div className='flex flex-col gap-10'>
@@ -58,18 +75,8 @@ const ProductDetail = (props) => {
           </div>
           <div className='flex flex-col gap-10'>
             <div className='flex flex-col gap-1'>
-              <div className=' text-zinc-700 text-sm'>Current Location/Process</div>
-              <div className='text-zinc-900 font-medium'>{productDetail?.batch?.current_location}</div>
-            </div>
-            <div className='flex flex-col gap-1'>
               <div className=' text-zinc-700 text-sm'>Thickness</div>
               <div className='text-zinc-900 font-medium'>{productDetail?.batch?.thickness} mm</div>
-            </div>
-          </div>
-          <div className='flex flex-col gap-10'>
-            <div className='flex flex-col gap-1'>
-              <div className=' text-zinc-700 text-sm'>Production Date</div>
-              <div className='text-zinc-900 font-medium'>{productDetail?.batch?.production_date}</div>
             </div>
             <div className='flex flex-col gap-1'>
               <div className=' text-zinc-700 text-sm'>Softness</div>
@@ -86,28 +93,58 @@ const ProductDetail = (props) => {
               <div className='text-zinc-900 font-medium'>&#8377; {productDetail?.price}/kg</div>
             </div>
           </div>
+          <div className='flex flex-col gap-1'>
+            <div className=' text-zinc-700 text-sm'>Quality Certification Link</div>
+            <a href={productDetail?.batch?.quality_certificate_link} className='text-zinc-900 font-medium underline'>{productDetail?.batch?.quality_certificate_link}</a>
+          </div>
         </div>
       </div>
 
-      <div className=' flex flex-col gap-4  border-b-2 max-h-[300px] justify-center px-4 py-4'>
+      <div className=' flex flex-col gap-4  border-b-2 max-h-[300px] justify-center px-8 py-8'>
         <div className='font-semibold text-base text-zinc-800'>PRODUCER DETAILS</div>
+        {productDetail?.batch?.producers?.map((producer) => (
+          <div className='flex gap-20' key={producer?.id}>
+            <div className='flex flex-col gap-10'>
+              <div className='flex flex-col gap-1'>
+                <div className=' text-zinc-700 text-sm'> Farm Name</div>
+                <div className='text-zinc-900 font-medium'>{producer?.farm_name}</div>
+              </div>
+            </div>
+            <div className='flex flex-col gap-10'>
+              <div className='flex flex-col gap-1'>
+                <div className=' text-zinc-700 text-sm'>District</div>
+                <div className='text-zinc-900 font-medium'>{producer?.district}</div>
+              </div>
+            </div>
+            <div className='flex flex-col gap-10'>
+              <div className='flex flex-col gap-1'>
+                <div className=' text-zinc-700 text-sm'>State </div>
+                <div className='text-zinc-900 font-medium'>{producer?.state}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className=' flex flex-col gap-4  border-b-2 max-h-[300px] justify-center px-8 py-8'>
+        <div className='font-semibold text-base text-zinc-800'>COLLECTER DETAILS</div>
         <div className='flex gap-20'>
           <div className='flex flex-col gap-10'>
             <div className='flex flex-col gap-1'>
               <div className=' text-zinc-700 text-sm'> Farm Name</div>
-              <div className='text-zinc-900 font-medium'>{productDetail?.producer?.farm_name}</div>
+              <div className='text-zinc-900 font-medium'>{productDetail?.collector?.user?.first_name}</div>
             </div>
           </div>
           <div className='flex flex-col gap-10'>
             <div className='flex flex-col gap-1'>
               <div className=' text-zinc-700 text-sm'>District</div>
-              <div className='text-zinc-900 font-medium'>{productDetail?.producer?.district}</div>
+              <div className='text-zinc-900 font-medium'>{productDetail?.collector?.district}</div>
             </div>
           </div>
           <div className='flex flex-col gap-10'>
             <div className='flex flex-col gap-1'>
               <div className=' text-zinc-700 text-sm'>State </div>
-              <div className='text-zinc-900 font-medium'>{productDetail?.producer?.state}</div>
+              <div className='text-zinc-900 font-medium'>{productDetail?.collector?.state}</div>
             </div>
           </div>
         </div>

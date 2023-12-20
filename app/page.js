@@ -12,29 +12,29 @@ import Loader from '@/components/Loader'
 
 export default function Home() {
   const { isLoggedIn, user } = useAuth()
-  // const [isLoading, setIsLoading] = useState(false)
-  // const [marketPlace, setMarketPlace] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [marketPlace, setMarketPlace] = useState([])
 
-  // useEffect(() => {
-  //   setIsLoading(true)
-  //   const fetchMarketplace = async () => {
-  //     try {
-  //       const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
-  //       setMarketPlace(response.data.data.stores)
-  //       setIsLoading(false)
-  //     } catch (error) {
-  //       console.error('Error fetching Marketplace:', error);
-  //       setIsLoading(false)
-  //     }
-  //   };
+  useEffect(() => {
+    setIsLoading(true)
+    const fetchMarketplace = async () => {
+      try {
+        const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
+        setMarketPlace(response.data.data.raw_wool)
+        setIsLoading(false)
+      } catch (error) {
+        console.error('Error fetching Marketplace:', error);
+        setIsLoading(false)
+      }
+    };
 
-  //   fetchMarketplace();
-  // }, []);
+    fetchMarketplace();
+  }, []);
 
   return (
     <div className='font-poppins'>
       <div className='absolute top-0 left-0 min-h-[70vh] w-full bg-zinc-800 z-0'></div>
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
       <div className='pt-24 relative flex flex-col'>
         {isLoggedIn && (<div className='font-extrabold text-2xl px-4 uppercase text-zinc-600 leading-tight'>Welcome Back! <span className='text-white'>{user?.name.split(' ')[0]}</span></div>)}
         <div className='flex flex-col gap-4'>
@@ -82,10 +82,22 @@ export default function Home() {
               <img src="/img/bgp.jpg" alt="" className='w-full' />
             </div>
             <div className='flex justify-center flex-col w-[70%]'>
-              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>You can request Shearing <span className='text-zinc-900'>from nearest shearer</span></div>
+              <div className='font-extrabold text-4xl uppercase text-zinc-500 w-[520px] leading-tight'>You can request Shearing <span className='text-zinc-900'>and can be the wholesaler</span></div>
               <Link href='/requestshearing' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
-                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase text-xl'><img src="/img/shearer.png" alt="" className='w-10 h-10' /> Shearer</div>
-                <div className='text-zinc-900 pl-14'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/shearer.png" alt="" className='w-8 h-8' /> Shearer</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Wool Shearers are vital to the textile industry because they shear the wool from, and then gather their fleece.</div>
+              </Link>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f1.png" alt="" className='w-8 h-8' /> List Products</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Empower your business by showcasing your products effortlessly.</div>
+              </Link>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f2.png" alt="" className='w-8 h-8' /> View Inventories</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Streamline your operations with a centralized inventory hub.</div>
+              </Link>
+              <Link href='/shop' className='p-4 cursor-pointer flex flex-col hover:bg-zinc-100'>
+                <div className='flex items-center gap-4 text-zinc-900 font-bold uppercase'><img src="/img/f3.png" alt="" className='w-8 h-8' /> Get the Best Price</div>
+                <div className='text-zinc-900 pl-14 text-xs'>Unlock unbeatable value with us – discover a platform where you can consistently secure the best prices.</div>
               </Link>
             </div>
           </div>
@@ -186,9 +198,9 @@ export default function Home() {
       <div className='p-10'>
         <div className='font-extrabold text-3xl uppercase text-zinc-900 flex items center gap-4'><BsShop /> Explore the marketplace</div>
         <div className='flex gap-8 overflow-x-auto py-8 scrollbar'>
-          {/* {marketPlace?.map((product) => (
+          {marketPlace?.map((product) => (
             <ProductCard1 key={product.id} product={product} />
-          ))} */}
+          ))}
         </div>
       </div>
 

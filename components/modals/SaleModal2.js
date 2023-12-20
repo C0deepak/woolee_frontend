@@ -5,12 +5,12 @@ import React, { useEffect, useState } from 'react'
 import { IoCloseCircleSharp } from 'react-icons/io5'
 import Loader from '../Loader'
 
-const SaleModal1 = ({ closeModal }) => {
+const SaleModal2 = ({ closeModal }) => {
     const { user } = useAuth()
     const [batch, setBatch] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
-        batch: '',
+        processedbatch: '',
         price: '',
     });
 
@@ -74,20 +74,20 @@ const SaleModal1 = ({ closeModal }) => {
                         <div className='flex flex-col gap-1 text-sm w-1/2'>
                             <label className='font-medium'>Wool Type</label>
                             <select
-                                name="batch"
-                                value={formData.batch}
+                                name="processedbatch"
+                                value={formData.processedbatch}
                                 onChange={handleChange}
                                 className='outline-none border-b-[1px] border-zinc-400 p-1'
                             >
                                 <option value="" disabled>Select Type</option>
                                 {batch?.map((option, index) => (
-                                    <option key={index} value={option.id}>Id:{option.id} - {option.type}</option>
+                                    <option key={index} value={option?.id}>Id:{option?.id} - {option?.batch?.type}</option>
                                 ))}
                             </select>
                         </div>
                         <div className='flex flex-col gap-1 text-sm w-1/2'>
                             <label className='font-medium'>Price (per Kg)</label>
-                            <input type='text' name="price" value={formData.price} onChange={handleChange} placeholder='985' className='outline-none border-b-[1px] border-zinc-400 p-1' />
+                            <input type='text' name="price" value={formData?.price} onChange={handleChange} placeholder='985' className='outline-none border-b-[1px] border-zinc-400 p-1' />
                         </div>
                     </div>
                 </div>
@@ -100,4 +100,4 @@ const SaleModal1 = ({ closeModal }) => {
     )
 }
 
-export default SaleModal1
+export default SaleModal2

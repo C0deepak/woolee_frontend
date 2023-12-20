@@ -3,11 +3,12 @@ import ProductSaleCard1 from '@/components/cards/ProductSaleCard1'
 import SoldCard from '@/components/cards/SoldCard'
 import { useAuth } from '@/context/authContext'
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 
 const Sold = () => {
     const { user } = useAuth()
+    const [soldItem, setSoldItem] = useState([])
     useEffect(() => {
         const fetchData = async () => {
             const config = {
@@ -17,8 +18,9 @@ const Sold = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/solditems', config);
-                console.log(response.data)
+                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/solditems`, config);
+                console.log(response.data.data)
+                setSoldItem(response.data.data)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -40,10 +42,9 @@ const Sold = () => {
                 <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/12 text-center">Total</h3>
             </div>
             <div>
-                <SoldCard />
-                <SoldCard />
-                <SoldCard />
-                <SoldCard />
+                {soldItem?.map((item) => (
+                    <SoldCard key={item.id} item={item}/>
+                ))}
             </div>
         </div>
     )

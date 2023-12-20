@@ -1,13 +1,5 @@
 const ServiceData = [
     {
-        id: 1,
-        img: '/service/1.png'
-    },
-    {
-        id: 2,
-        img: '/service/2.png'
-    },
-    {
         id: 3,
         img: '/service/3.png'
     },
