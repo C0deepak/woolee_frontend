@@ -76,7 +76,7 @@ const Service = () => {
             },
         };
         try {
-            const response = await axios.post('https://woolee-backend.vercel.app/api/producer/service/equests',
+            const response = await axios.post('https://woolee-backend.vercel.app/api/producer/service/requests',
                 {
                     producer: user.id,
                     service: service.id,
