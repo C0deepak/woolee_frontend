@@ -67,7 +67,7 @@ const Service = () => {
         },
     ]
 
-    const handleServiceRequest = async (id) => {
+    const handleServiceRequest = async (service) => {
         setIsLoading(true)
         const config = {
             headers: {
@@ -76,7 +76,12 @@ const Service = () => {
             },
         };
         try {
-            const response = await axios.post('https://woolee-backend.vercel.app/api/processor/services',{id}, config);
+            const response = await axios.post('https://woolee-backend.vercel.app/api/processor/services',
+                {
+                    producer: user.id,
+                    service: service.id,
+                },
+                config);
             alert('Service Requested Successfully')
             setIsLoading(false)
         } catch (error) {
@@ -111,7 +116,7 @@ const Service = () => {
                             <div className='text-zinc-900'>Processor Id : {service?.processor}</div>
                             <div className='text-zinc-900'>{service?.name}</div>
                             <div className='text-zinc-600 text-sm'>{service?.price}</div>
-                            <div className='bg-zinc-900 text-zinc-100 rounded-full text-sm px-8 py-1 cursor-pointer' onClick={() => handleServiceRequest(service?.id)}>Request Service</div>
+                            <div className='bg-zinc-900 text-zinc-100 rounded-full text-sm px-8 py-1 cursor-pointer' onClick={() => handleServiceRequest(service)}>Request Service</div>
                         </div>
                     ))}
                 </div>
