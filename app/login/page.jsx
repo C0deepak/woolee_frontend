@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/login', formData);
+      const response = await axios.post('https://woolee-backend.vercel.app/api/login', formData);
       console.log('Login successful', response.data.message);
       login(response.data.user);
       setIsLoading(false)

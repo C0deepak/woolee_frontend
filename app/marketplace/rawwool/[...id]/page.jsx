@@ -21,7 +21,7 @@ const ProductDetail = (props) => {
         },
       };
       try {
-        const { data } = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/raw_wool/${slug}`, config);
+        const { data } = await axios.get(`https://woolee-backend.vercel.app/api/raw_wool/${slug}`, config);
         setProductDetail(data.data);
         setLoading(false);
       } catch (error) {
@@ -41,7 +41,7 @@ const ProductDetail = (props) => {
       },
     };
     try {
-      const { data } = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/collector/orders`, config);
+      const { data } = await axios.get(`https://woolee-backend.vercel.app/api/collector/orders`, config);
       setLoading(false);
     } catch (error) {
       console.log('Error in ordering product');

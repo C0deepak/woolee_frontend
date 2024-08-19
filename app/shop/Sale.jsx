@@ -24,7 +24,7 @@ const Sale = () => {
         },
       };
       try {
-        const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mystore`, config);
+        const response = await axios.get(`https://woolee-backend.vercel.app/api/${user.role}/mystore`, config);
         console.log(response.data)
         setStore(response.data)
         setIsLoading(false)

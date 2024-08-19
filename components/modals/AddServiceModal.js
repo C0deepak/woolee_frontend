@@ -30,7 +30,7 @@ const AddServiceModal = ({closeModal}) => {
             },
         };
         try {
-            const response = await axios.post(`https://woolee-backend-riosumit.vercel.app/api/processor/services`, formData, config);
+            const response = await axios.post(`https://woolee-backend.vercel.app/api/processor/services`, formData, config);
             console.log('Batch Added successfully', response.data.message);
             setIsLoading(false)
             closeModal()

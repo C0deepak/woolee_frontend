@@ -25,7 +25,7 @@ const Inventory = () => {
                 },
             };
             try {
-                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mybatch`, config);
+                const response = await axios.get(`https://woolee-backend.vercel.app/api/${user.role}/mybatch`, config);
                 console.log(response.data)
                 setOrder(response.data)
                 setIsLoading(false)

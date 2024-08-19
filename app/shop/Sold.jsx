@@ -18,7 +18,7 @@ const Sold = () => {
                 },
             };
             try {
-                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/solditems`, config);
+                const response = await axios.get(`https://woolee-backend.vercel.app/api/${user.role}/solditems`, config);
                 console.log(response.data.data)
                 setSoldItem(response.data.data)
             } catch (error) {

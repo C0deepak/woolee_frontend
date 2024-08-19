@@ -23,7 +23,7 @@ const Service = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/processor/services', config);
+                const response = await axios.get('https://woolee-backend.vercel.app/api/processor/services', config);
                 setServices(response.data.data)
                 setIsLoading(false)
             } catch (error) {
@@ -76,7 +76,7 @@ const Service = () => {
             },
         };
         try {
-            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/processor/services',{id}, config);
+            const response = await axios.post('https://woolee-backend.vercel.app/api/processor/services',{id}, config);
             alert('Service Requested Successfully')
             setIsLoading(false)
         } catch (error) {

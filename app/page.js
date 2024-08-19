@@ -19,7 +19,7 @@ export default function Home() {
     setIsLoading(true)
     const fetchMarketplace = async () => {
       try {
-        const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/market');
+        const response = await axios.get('https://woolee-backend.vercel.app/api/market');
         setMarketPlace(response.data.data.raw_wool)
         setIsLoading(false)
       } catch (error) {

@@ -49,7 +49,6 @@ const StateChart = ({ stateName, data }) => {
 };
 
 const Admin = () => {
-    // Sample data for different states
     const stateData = {
         AndhraPradesh: { GradeA: 30, GradeB: 45, GradeC: 25 },
         ArunachalPradesh: { GradeA: 20, GradeB: 50, GradeC: 30 },

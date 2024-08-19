@@ -27,7 +27,7 @@ const SaleModal1 = ({ closeModal }) => {
             },
         };
         try {
-            const response = await axios.post(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/stores`, formData, config);
+            const response = await axios.post(`https://woolee-backend.vercel.app/api/${user.role}/stores`, formData, config);
             console.log('Product Added successfully', response.data.message);
             setIsLoading(false)
             closeModal()
@@ -47,7 +47,7 @@ const SaleModal1 = ({ closeModal }) => {
                 },
             };
             try {
-                const response = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/${user.role}/mybatch`, config);
+                const response = await axios.get(`https://woolee-backend.vercel.app/api/${user.role}/mybatch`, config);
                 setBatch(response.data)
                 setIsLoading(false)
             } catch (error) {

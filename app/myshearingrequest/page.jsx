@@ -19,7 +19,7 @@ const MyShearingRequest = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/myrequest', config);
+                const response = await axios.get('https://woolee-backend.vercel.app/api/myrequest', config);
                 console.log(response.data)
                 setRequestedShearing(response.data)
                 setIsLoading(false)

@@ -21,7 +21,7 @@ const ProductDetail = (props) => {
         },
       };
       try {
-        const { data } = await axios.get(`https://woolee-backend-riosumit.vercel.app/api/processed_wool/${slug}`, config);
+        const { data } = await axios.get(`https://woolee-backend.vercel.app/api/processed_wool/${slug}`, config);
         setProductDetail(data.data);
         setLoading(false);
       } catch (error) {

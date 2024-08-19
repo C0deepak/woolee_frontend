@@ -19,7 +19,7 @@ const Profile = () => {
         },
       };
       try {
-        const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/profile', config);
+        const response = await axios.get('https://woolee-backend.vercel.app/api/profile', config);
         console.log(response.data)
         setProfileData(response.data)
       } catch (error) {

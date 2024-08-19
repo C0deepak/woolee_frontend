@@ -26,7 +26,7 @@ const RequestShearingModal = ({closeModal, id}) => {
             },
         };
         try {
-            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/shearing_requests', formData, config);
+            const response = await axios.post('https://woolee-backend.vercel.app/api/shearing_requests', formData, config);
             console.log('Shearing Request successfully', response.data.message);
             setIsLoading(false)
             closeModal()

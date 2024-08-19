@@ -19,7 +19,7 @@ const RequestShearer = () => {
                 },
             };
             try {
-                const response = await axios.get('https://woolee-backend-riosumit.vercel.app/api/shearers', config);
+                const response = await axios.get('https://woolee-backend.vercel.app/api/shearers', config);
                 setShearer(response.data.data)
                 setIsLoading(false)
             } catch (error) {

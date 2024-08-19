@@ -35,7 +35,7 @@ const ProcessorRegister = () => {
         };
         setIsLoading(true)
         try {
-            const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/processors', formData, config);
+            const response = await axios.post('https://woolee-backend.vercel.app/api/processors', formData, config);
             console.log('Registration as a producer successful', response.data.message);
             const userData = {
                 ...user,

@@ -21,7 +21,7 @@ const Register = () => {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.post('https://woolee-backend-riosumit.vercel.app/api/register', formData);
+      const response = await axios.post('https://woolee-backend.vercel.app/api/register', formData);
       console.log('Registration successful', response.data.message);
       login(response.data.user);
       setIsLoading(false)
